@@ -1,13 +1,6 @@
 package com.example.happypet.model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "user")
-public class User {
-
-    @PrimaryKey(autoGenerate = true)
-    private long userId;
+public abstract class User {
 
     private String firstName;
 
@@ -15,30 +8,9 @@ public class User {
 
     private String email;
 
-    private String phoneNumber;
-
     private String password;
 
     private String photoPath;
-
-    public User(){}
-
-    public User(long idUser, String firstName, String lastName, String email, String phoneNumber, String password) {
-        this.userId = idUser;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long idUser) {
-        this.userId = idUser;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -62,14 +34,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

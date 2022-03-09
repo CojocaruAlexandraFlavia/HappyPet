@@ -15,6 +15,27 @@ public class Doctor {
 
     private String lastName;
 
+    public long getDoctorId() {
+        return doctorId;
+    }
 
+    public void setDoctorId(long doctorId) {
+        this.doctorId = doctorId;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

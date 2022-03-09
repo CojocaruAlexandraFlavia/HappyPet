@@ -3,12 +3,20 @@ package com.example.happypet.model;
 import androidx.annotation.StringDef;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@Entity(tableName = "animal")
+@Entity(tableName = "animal", foreignKeys = {
+        @ForeignKey(
+                entity = Client.class,
+                parentColumns = "clientId",
+                childColumns = "ownerId"
+        )
+})
 public class Animal {
 
     public static final String DOG = "DOG";
@@ -27,17 +35,16 @@ public class Animal {
 
     private int age;
 
-    private String photoPath;
+    @ColumnInfo(index = true)
+    private long ownerId;
 
-    private Long ownerId;
-
-    public Animal(long animalId, String name, String type, int age, String photoPath) {
-        this.animalId = animalId;
-        this.name = name;
-        this.type = type;
-        this.age = age;
-        this.photoPath = photoPath;
-    }
+//    public Animal(long animalId, String name, @AnimalType String type, int age, long ownerId) {
+//        this.animalId = animalId;
+//        this.name = name;
+//        this.type = type;
+//        this.age = age;
+//        this.ownerId = ownerId;
+//    }
 
     public Animal(){}
 
@@ -57,11 +64,11 @@ public class Animal {
         this.name = name;
     }
 
-    public String getType() {
+    public @AnimalType String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(@AnimalType String type) {
         this.type = type;
     }
 
@@ -73,19 +80,11 @@ public class Animal {
         this.age = age;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
-
-    public Long getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
     }
 }

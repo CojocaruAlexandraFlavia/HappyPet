@@ -3,25 +3,48 @@ package com.example.happypet.model;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.example.happypet.util.LocalDateTimeConverter;
 
-@Entity(tableName = "appointment")
+import java.time.LocalDateTime;
+
+@Entity(tableName = "appointment", foreignKeys = {
+        @ForeignKey(
+                entity = Animal.class,
+                parentColumns = "animalId",
+                childColumns = "animalId"
+        ),
+        @ForeignKey(
+              entity = Doctor.class,
+              parentColumns = "doctorId",
+              childColumns = "doctorId"
+        ),
+        @ForeignKey(
+                entity = AppointmentType.class,
+                parentColumns = "appointmentTypeId",
+                childColumns = "appointmentTypeId"
+        )
+})
 public class Appointment {
 
     @PrimaryKey(autoGenerate = true)
     private long appointmentId;
 
-    private LocalDateTime date;
+    private String date;
 
+    @ColumnInfo(index = true)
     private long animalId;
 
+    @ColumnInfo(index = true)
     private long doctorId;
 
-    private long userId;
+    @ColumnInfo(index = true)
+    private long appointmentTypeId;
 
     public long getAppointmentId() {
         return appointmentId;
@@ -31,13 +54,12 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setDate(LocalDateTime date) {
-        this.date = LocalDateTime.parse(date.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public long getAnimalId() {
@@ -56,11 +78,16 @@ public class Appointment {
         this.doctorId = doctorId;
     }
 
-    public long getUserId() {
-        return userId;
+    public long getAppointmentTypeId() {
+        return appointmentTypeId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setAppointmentTypeId(long appointmentTypeId) {
+        this.appointmentTypeId = appointmentTypeId;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public LocalDateTime getDateAsLocalDateTime() {
+        return LocalDateTimeConverter.toDate(date);
     }
 }

@@ -9,26 +9,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.happypet.R;
+import com.example.happypet.model.Animal;
+import com.example.happypet.model.view_model.PetViewModel;
 import com.google.android.material.internal.NavigationMenuItemView;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PetActivity extends AppCompatActivity{
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
+    private PetViewModel petViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets);
-
-
         MenuMethod();
+        new Thread(() ->{
+            petViewModel = new PetViewModel(this.getApplication());
+            List<Animal> pets = petViewModel.getAllPetsForOwner(1);
+            for (Animal p:pets) {
+                System.out.println(p);
+            }
+        }).start();
+
 
     }
 
-    public void MenuMethod() {
+    private void MenuMethod() {
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
@@ -45,7 +54,7 @@ public class PetActivity extends AppCompatActivity{
         return navigationMethod(item);
     }
 
-    public boolean navigationMethod(MenuItem item) {
+    private boolean navigationMethod(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
 
             NavigationMenuItemView profile = findViewById(R.id.nav_account);

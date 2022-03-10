@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.happypet.R;
+import com.example.happypet.model.Animal;
 import com.example.happypet.model.Client;
+import com.example.happypet.model.view_model.PetViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
@@ -26,8 +28,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private UserViewModel userViewModel;
-
+    private PetViewModel petViewModel;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -36,13 +37,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        new Thread(() ->{
+            petViewModel = new PetViewModel(this.getApplication());
+            Animal a = new Animal();
+            a.setOwnerId(1);
+            petViewModel.insertPet(a);
+        }).start();
 
         MenuMethod();
 
     }
 
-    public void MenuMethod() {
+    private void MenuMethod() {
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         return navigationMethod(item);
     }
 
-    public boolean navigationMethod(MenuItem item) {
+    private boolean navigationMethod(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
 
             NavigationMenuItemView profile = findViewById(R.id.nav_account);

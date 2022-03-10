@@ -5,17 +5,21 @@
 
     <item
         android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:title="Contul meu" />
 
-    <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
-
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Logout" />
     <item
         android:id="@+id/my_pets"
         android:title="Animalutele mele" />
+    <item
+        android:id="@+id/nav_settings"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="Setari"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Deconectare" />
+
 
 </menu>

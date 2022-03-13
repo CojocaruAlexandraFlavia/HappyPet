@@ -3,6 +3,9 @@ package com.example.happypet.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,22 +23,39 @@ public class PetActivity extends AppCompatActivity{
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     private PetViewModel petViewModel;
+    private ImageButton imageButtonCat, imageButtonDog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets);
         MenuMethod();
-        new Thread(() ->{
-            petViewModel = new PetViewModel(this.getApplication());
-            List<Animal> pets = petViewModel.getAllPetsForOwner(1);
-            for (Animal p:pets) {
-                System.out.println(p);
+        imageButtonCat = findViewById(R.id.imageButton3);
+        imageButtonDog = findViewById(R.id.imageButton4);
+        imageButtonCat.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PetActivity.this, "PISICA ADAUGATA", Toast.LENGTH_SHORT).show();
             }
-        }).start();
+        }));
+        imageButtonDog.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PetActivity.this, "CAINE ADAUGAT", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+//        new Thread(() ->{
+//            petViewModel = new PetViewModel(this.getApplication());
+//            List<Animal> pets = petViewModel.getAllPetsForOwner(1);
+//            for (Animal p:pets) {
+//                System.out.println(p);
+//            }
+//        }).start();
 
 
     }
+
 
     private void MenuMethod() {
         drawerLayout = findViewById(R.id.my_drawer_layout);

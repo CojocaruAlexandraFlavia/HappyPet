@@ -27,4 +27,8 @@ public class UserViewModel extends AndroidViewModel {
     public List<Client> getAllClients(){
         return repository.getAllClients();
     }
+
+    public boolean findUserByEmail(String email){
+        return repository.findUserByEmail(email);
+    }
 }

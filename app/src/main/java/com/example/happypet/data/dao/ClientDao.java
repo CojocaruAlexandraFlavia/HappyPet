@@ -20,4 +20,7 @@ public interface ClientDao {
     @Query("SELECT * FROM client")
     List<Client> getAll();
 
+    @Query("SELECT clientId FROM client WHERE email=:email")
+    long findByEmail(String email);
+
 }

@@ -6,6 +6,7 @@ import com.example.happypet.data.dao.ClientDao;
 import com.example.happypet.data.dao.DoctorDao;
 import com.example.happypet.model.Client;
 import com.example.happypet.model.Doctor;
+import com.example.happypet.model.User;
 import com.example.happypet.util.RoomDatabaseImpl;
 
 import java.util.List;
@@ -30,4 +31,9 @@ public class UserRepository {
         return clientDao.getAll();
     }
 
+    public boolean findUserByEmail(String email){
+        long client = clientDao.findByEmail(email);
+        long doctor = doctorDao.findByEmail(email);
+        return client > 0 || doctor > 0;
+    }
 }

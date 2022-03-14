@@ -3,8 +3,6 @@ package com.example.happypet.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.math.BigDecimal;
-
 @Entity(tableName = "appointment_type")
 public class AppointmentType {
 

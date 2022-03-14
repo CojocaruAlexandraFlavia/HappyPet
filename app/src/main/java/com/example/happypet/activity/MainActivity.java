@@ -3,6 +3,7 @@ package com.example.happypet.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private PetViewModel petViewModel;
     public DrawerLayout drawerLayout;
@@ -37,26 +38,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        TextView register = findViewById(R.id.register_link);
         MenuMethod();
+        register.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
 
+       });
     }
 
-    private void MenuMethod() {
-        drawerLayout = findViewById(R.id.my_drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+        private void MenuMethod() {
+            drawerLayout = findViewById(R.id.my_drawer_layout);
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        // to make the Navigation drawer icon always appear on the action bar
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-    }
+            // pass the Open and Close toggle for the drawer layout listener
+            // to toggle the button
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
 
-    @Override
+            // to make the Navigation drawer icon always appear on the action bar
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return navigationMethod(item);
     }
@@ -95,5 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

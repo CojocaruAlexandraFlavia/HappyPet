@@ -22,6 +22,13 @@ public class Doctor extends User{
     @ColumnInfo(index = true)
     private long locationId;
 
+    public Doctor(String token, long locationId) {
+        this.token = token;
+        this.locationId = locationId;
+    }
+
+    //public Doctor(){}
+
     public long getDoctorId() {
         return doctorId;
     }

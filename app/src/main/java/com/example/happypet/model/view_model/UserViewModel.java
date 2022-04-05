@@ -7,20 +7,24 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.example.happypet.data.repository.UserRepository;
 import com.example.happypet.model.Client;
+import com.example.happypet.model.Doctor;
 
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 public class UserViewModel extends AndroidViewModel {
 
     private final UserRepository repository;
 
+    @Inject
     public UserViewModel(@NonNull Application application) {
         super(application);
         repository = new UserRepository(application);
     }
 
     public void insertClient(Client client){
-        System.out.println("insert client");
         repository.insertClient(client);
     }
 
@@ -30,5 +34,21 @@ public class UserViewModel extends AndroidViewModel {
 
     public boolean findUserByEmail(String email){
         return repository.findUserByEmail(email);
+    }
+
+    public Doctor findDoctorByEmail(String email){
+        return repository.getDoctorByEmail(email);
+    }
+
+    public Doctor getDoctorById(long id){
+        return repository.getDoctorById(id);
+    }
+
+    public void insertDoctor(Doctor doctor){
+        repository.insertDoctor(doctor);
+    }
+
+    public List<Doctor> getALlDoctors(){
+        return repository.getAllDoctors();
     }
 }

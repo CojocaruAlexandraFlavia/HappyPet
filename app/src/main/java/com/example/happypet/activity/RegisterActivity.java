@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,45 +33,54 @@ import com.example.happypet.model.Client;
 import com.example.happypet.model.enums.PasswordStrength;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.example.happypet.util.FilesUtils;
+import com.example.happypet.util.MyApplication;
+import com.example.happypet.util.PermissionUtils;
 
 import org.apache.commons.io.FileUtils;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class RegisterActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private EditText lastNameEditText, firstNameEditText, emailEditText, passwordEditText, confirmPasswordEditText, phoneEditText;
-    private Button registerButton, addProfilePictureButton, cameraButton;
     private ProgressBar passwordStrengthBar;
     private ImageView profilePhotoView, test;
-    private UserViewModel userViewModel;
     private String uploadedFilePath = "";
 
     private static final int PICK_IMAGE = 100;
+
+    @Inject
+    UserViewModel userViewModel;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //((MyApplication) getApplicationContext()).appComponent.inject(this);
+
+        MyApplication.getApp().getApplicationComponent().inject(this);
+
         lastNameEditText = findViewById(R.id.last_name_register);
         firstNameEditText = findViewById(R.id.first_name_register);
         emailEditText = findViewById(R.id.email_register);
         passwordEditText = findViewById(R.id.password_register);
         phoneEditText = findViewById(R.id.phone_register);
-        registerButton = findViewById(R.id.button_create_account);
+        Button registerButton = findViewById(R.id.button_create_account);
         confirmPasswordEditText = findViewById(R.id.confirm_password_register);
         passwordStrengthBar = findViewById(R.id.password_strength_bar_register);
         profilePhotoView = findViewById(R.id.profile_photo_register);
-        addProfilePictureButton = findViewById(R.id.select_profile_picture_register);
+        Button addProfilePictureButton = findViewById(R.id.select_profile_picture_register);
         test = findViewById(R.id.test);
-        cameraButton = findViewById(R.id.camera_regsiter);
+        Button cameraButton = findViewById(R.id.camera_regsiter);
 
         passwordEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,6 +158,10 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
         addProfilePictureButton.setOnClickListener(view -> {
+
+            PermissionUtils.requestPermission(this, 1,
+                    Manifest.permission.READ_EXTERNAL_STORAGE, true);
+
             String[] PERMISSIONS = {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
@@ -224,7 +238,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             if(validation){
                 new Thread(() -> {
-                    userViewModel = new UserViewModel(this.getApplication());
+                    //userViewModel = new UserViewModel(this.getApplication());
                     boolean existingEmail = userViewModel.findUserByEmail(email);
                     new Thread(() -> {
                         if(existingEmail) {
@@ -253,7 +267,7 @@ public class RegisterActivity extends AppCompatActivity {
         File directory = cw.getDir("Profile photos", Context.MODE_PRIVATE);
         File file = new File(directory, fileName);
         if (!file.exists()) {
-            FileOutputStream fos = null;
+            FileOutputStream fos;
             try {
                 fos = new FileOutputStream(file);
                 fos.write(FileUtils.readFileToByteArray(file));

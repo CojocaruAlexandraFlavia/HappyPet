@@ -13,25 +13,27 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.happypet.R;
+import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.util.PermissionUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
 import java.util.Objects;
 
-public class MapsActivity extends AppCompatActivity implements
-        GoogleMap.OnMyLocationButtonClickListener,
+public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
-         OnMapReadyCallback,
-         ActivityCompat.OnRequestPermissionsResultCallback{
+        OnMapReadyCallback,
+        ActivityCompat.OnRequestPermissionsResultCallback{
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    /**
-     * Flag indicating whether a requested permission has been denied after returning in
-     * {@link #onRequestPermissionsResult(int, String[], int[])}.
-     */
+    private LocationViewModel locationViewModel;
+    private List<com.example.happypet.model.Location> locations;
+
     private boolean permissionDenied = false;
 
     private GoogleMap map;
@@ -40,34 +42,13 @@ public class MapsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
-    }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     *
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-
-    @SuppressLint("MissingPermission")
-    private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (map != null) {
-                map.setMyLocationEnabled(true);
-            }
-        } else {
-            // Permission to access the location is missing. Show rationale and request permission
-            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
-        }
+        new Thread(() -> {
+            locationViewModel = new LocationViewModel(this.getApplication());
+            locations = locationViewModel.getAllLocations();
+        }).start();
     }
 
     @Override
@@ -76,13 +57,27 @@ public class MapsActivity extends AppCompatActivity implements
         map.setOnMyLocationButtonClickListener(this);
         map.setOnMyLocationClickListener(this);
         enableMyLocation();
+        for(com.example.happypet.model.Location location: locations){
+            LatLng latLng = new LatLng(Double.parseDouble(location.getLatitude()), Double.parseDouble(location.getLongitude()));
+            map.addMarker(new MarkerOptions().position(latLng).title(location.getAddress()));
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (map != null) {
+                map.setMyLocationEnabled(true);
+            }
+        } else {
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        }
     }
 
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
         return false;
     }
 
@@ -95,7 +90,6 @@ public class MapsActivity extends AppCompatActivity implements
     protected void onResumeFragments() {
         super.onResumeFragments();
         if (permissionDenied) {
-            // Permission was not granted, display error dialog.
             showMissingPermissionError();
             permissionDenied = false;
         }
@@ -107,24 +101,15 @@ public class MapsActivity extends AppCompatActivity implements
         if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
             return;
         }
-
         if (PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Enable the my location layer if the permission has been granted.
             enableMyLocation();
         } else {
-            // Permission was denied. Display an error message
-            // Display the missing permission error dialog when the fragments resume.
             permissionDenied = true;
         }
     }
 
-
-    /**
-     * Displays a dialog with error message explaining that the location permission is missing.
-     */
     private void showMissingPermissionError() {
-        PermissionUtils.PermissionDeniedDialog
-                .newInstance(true).show(getSupportFragmentManager(), "dialog");
+        PermissionUtils.PermissionDeniedDialog.newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
 }

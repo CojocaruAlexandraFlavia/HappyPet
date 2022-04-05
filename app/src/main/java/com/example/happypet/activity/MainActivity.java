@@ -39,12 +39,13 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView register = findViewById(R.id.register_link);
-        MenuMethod();
+
         register.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
 
        });
+        MenuMethod();
     }
 
 

@@ -51,4 +51,6 @@ public abstract class User {
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
     }
+
+
 }

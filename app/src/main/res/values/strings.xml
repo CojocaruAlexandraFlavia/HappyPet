@@ -64,5 +64,10 @@
     <string name="marker_collision_label">Marker Collision</string>
     <string name="marker_collision_description">Demonstrates different supported marker collision behaviors.</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="distribuie_profilul">Distribuie profilul</string>
+    <string name="logare">Logare</string>
+
+    <string name="facebook_app_id">523732319315186</string>
+    <string name="facebook_client_token">efb99c95cb05d8bd819e49f50ed499e3</string>
 
 </resources>

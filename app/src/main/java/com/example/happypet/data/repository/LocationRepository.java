@@ -3,6 +3,7 @@ package com.example.happypet.data.repository;
 import android.app.Application;
 
 import com.example.happypet.data.dao.LocationDao;
+import com.example.happypet.model.Doctor;
 import com.example.happypet.model.Location;
 import com.example.happypet.util.RoomDatabaseImpl;
 
@@ -20,4 +21,9 @@ public class LocationRepository {
     public List<Location> getAllLocations(){
         return locationDao.getAllLocations();
     }
+
+    public void insertLocation(Location location){
+        locationDao.insertLocation(location);
+    }
+
 }

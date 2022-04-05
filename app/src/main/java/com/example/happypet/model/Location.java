@@ -13,9 +13,18 @@ public class Location {
 
     private String address;
 
-    private double latitude;
+    private String latitude;
 
-    private double longitude;
+    private String longitude;
+
+    public Location(String city, String address, String latitude, String longitude) {
+        this.city = city;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    //public Location(){}
 
     public long getLocationId() {
         return locationId;
@@ -41,19 +50,19 @@ public class Location {
         this.address = address;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 }

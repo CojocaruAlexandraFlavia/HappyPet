@@ -27,13 +27,8 @@ public class FilesUtils {
     public static String getPath(Context ctx, Uri uri) {
         String ret;
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                // Android OS above sdk version 19.
-                ret = getUriRealPathAboveKitkat(ctx, uri);
-            } else {
-                // Android OS below sdk version 19
-                ret = getRealPath(ctx.getContentResolver(), uri, null);
-            }
+            // Android OS above sdk version 19.
+            ret = getUriRealPathAboveKitkat(ctx, uri);
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("DREG", "FilePath Catch: " + e);

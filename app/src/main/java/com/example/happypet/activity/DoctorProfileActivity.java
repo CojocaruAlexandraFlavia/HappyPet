@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 
 import com.example.happypet.R;
+import com.example.happypet.databinding.ActivityDoctorProfileBinding;
 import com.example.happypet.model.Doctor;
 import com.example.happypet.model.Location;
 import com.example.happypet.model.view_model.LocationViewModel;
@@ -33,10 +34,14 @@ public class DoctorProfileActivity extends AppCompatActivity {
     private LocationViewModel locationViewModel;
     private Doctor doctor;
     private long doctorId;
+   // private ActivityDoctorProfileBinding activityDoctorProfileBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+       // activityDoctorProfileBinding = ActivityDoctorProfileBinding.inflate(getLayoutInflater());
+       // setContentView(activityDoctorProfileBinding.getRoot());
         setContentView(R.layout.activity_doctor_profile);
         doctorFirstNameView = findViewById(R.id.doctor_first_name);
         doctorLastNameView = findViewById(R.id.doctor_last_name);

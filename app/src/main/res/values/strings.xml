@@ -80,5 +80,22 @@
 
     <string name="facebook_app_id">523732319315186</string>
     <string name="facebook_client_token">efb99c95cb05d8bd819e49f50ed499e3</string>
+    <string name="enter_email">Email</string>
+    <string name="last_name">Nume</string>
+    <string name="first_name">Prenume</string>
+    <string name="enter_password">Parola</string>
+    <string name="confirm_password">Confirma parola</string>
+    <string name="register">Inregistrare</string>
+    <string name="schimba_fotografia">Adauga fotografie</string>
+    <string name="alege_o_optiune">Alege o optiune</string>
+    <string name="login">Logare</string>
+    <string name="acasa">Acasa</string>
+    <string name="animalutele_mele">Animalutele mele</string>
+    <string name="setari">Setari</string>
+    <string name="deconectare">Deconectare</string>
+    <string name="profilul_meu">Profilul meu</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="continua_cu_facebook">Continua cu Facebook</string>
 
 </resources>

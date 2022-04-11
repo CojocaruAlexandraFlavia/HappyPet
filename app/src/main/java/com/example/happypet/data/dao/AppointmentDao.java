@@ -2,12 +2,24 @@ package com.example.happypet.data.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.happypet.model.Appointment;
 
 @Dao
 public interface AppointmentDao {
 
     @Query("DELETE FROM appointment")
     void deleteAll();
+
+    @Insert
+    long insertAppointment(Appointment appointment);
+
+    @Query("SELECT * FROM appointment WHERE appointmentId=:id")
+    Appointment getAppointmentById(long id);
+
+    @Query("SELECT appointmentId FROM appointment WHERE rowId=:rowId")
+    long getAppointmentByRowId(long rowId);
 
 }

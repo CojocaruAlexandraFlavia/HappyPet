@@ -27,4 +27,7 @@ public interface DoctorDao {
 
     @Query("SELECT * FROM doctor")
     List<Doctor> getAll();
+
+    @Query("SELECT * FROM doctor WHERE locationId=:locationId")
+    List<Doctor> getDoctorsForLocation(long locationId);
 }

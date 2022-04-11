@@ -27,7 +27,7 @@ public class Doctor extends User{
         this.locationId = locationId;
     }
 
-    //public Doctor(){}
+    public Doctor(){}
 
     public long getDoctorId() {
         return doctorId;

@@ -9,10 +9,13 @@ import com.example.happypet.model.Location;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class LocationViewModel extends AndroidViewModel {
 
     private final LocationRepository locationRepository;
 
+    @Inject
     public LocationViewModel(Application application){
         super(application);
         locationRepository = new LocationRepository(application);
@@ -25,4 +28,9 @@ public class LocationViewModel extends AndroidViewModel {
     public void insertLocation(Location location){
         locationRepository.insertLocation(location);
     }
+
+    public Location getLocationById(long id){
+        return locationRepository.getLocationById(id);
+    }
+
 }

@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.happypet.R;
 import com.example.happypet.model.view_model.LocationViewModel;
+import com.example.happypet.util.MyApplication;
 import com.example.happypet.util.PermissionUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
@@ -31,7 +34,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private LocationViewModel locationViewModel;
+    @Inject
+    LocationViewModel locationViewModel;
+
     private List<com.example.happypet.model.Location> locations;
 
     private boolean permissionDenied = false;
@@ -45,10 +50,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-        new Thread(() -> {
-            locationViewModel = new LocationViewModel(this.getApplication());
-            locations = locationViewModel.getAllLocations();
-        }).start();
+        MyApplication.getApp().getApplicationComponent().inject(this);
+
+        new Thread(() -> locations = locationViewModel.getAllLocations()).start();
     }
 
     @Override

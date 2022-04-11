@@ -9,10 +9,13 @@ import com.example.happypet.util.RoomDatabaseImpl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class LocationRepository {
 
     private final LocationDao locationDao;
 
+    @Inject
     public LocationRepository(Application application) {
         RoomDatabaseImpl db = RoomDatabaseImpl.getDatabase(application);
         locationDao = db.locationDao();
@@ -24,6 +27,10 @@ public class LocationRepository {
 
     public void insertLocation(Location location){
         locationDao.insertLocation(location);
+    }
+
+    public Location getLocationById(long id){
+        return locationDao.getLocationById(id);
     }
 
 }

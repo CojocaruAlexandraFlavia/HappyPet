@@ -20,4 +20,7 @@ public interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLocation(Location location);
+
+    @Query("SELECT * FROM location WHERE locationId=:locationId")
+    Location getLocationById(long locationId);
 }

@@ -17,6 +17,7 @@ import com.example.happypet.model.Doctor;
 import com.example.happypet.model.Location;
 import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
+import com.example.happypet.util.MyApplication;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
@@ -25,14 +26,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DoctorProfileActivity extends AppCompatActivity {
 
     private TextView doctorFirstNameView, doctorLastNameView, doctorEmailView;
-    private Button shareDoctorProfile;
-    private UserViewModel userViewModel;
+
+    @Inject
     private LocationViewModel locationViewModel;
+
     private Doctor doctor;
     private long doctorId;
+
+    @Inject
+    UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +48,9 @@ public class DoctorProfileActivity extends AppCompatActivity {
         doctorFirstNameView = findViewById(R.id.doctor_first_name);
         doctorLastNameView = findViewById(R.id.doctor_last_name);
         doctorEmailView = findViewById(R.id.doctor_email);
-        shareDoctorProfile = findViewById(R.id.share_doctor_profile);
+        Button shareDoctorProfile = findViewById(R.id.share_doctor_profile);
+
+        MyApplication.getApp().getApplicationComponent().inject(this);
 
         if(getIntent().hasExtra("previousIntent")){
             System.out.println("has extra");
@@ -55,7 +64,6 @@ public class DoctorProfileActivity extends AppCompatActivity {
         }
 
         new Thread(() -> {
-            userViewModel = new UserViewModel(this.getApplication());
 //            locationViewModel = new LocationViewModel(this.getApplication());
 //            new Thread(() -> locationViewModel.insertLocation(new Location("Bucuresti", "Adresa", "45.256595904081074", "25.63166379563"))).start();
 //            Doctor doctor1 = new Doctor();

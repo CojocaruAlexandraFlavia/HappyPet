@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -54,7 +53,8 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
     private ImageView profilePhotoView, test;
     private String uploadedFilePath = "";
 
-    private static final int PICK_IMAGE = 100;
+    private static final int TAKE_PHOTO = 1;
+    private static final int CHOOSE_PHOTO_FROM_GALLERY = 2;
 
     @Inject
     UserViewModel userViewModel;
@@ -64,8 +64,6 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        //((MyApplication) getApplicationContext()).appComponent.inject(this);
 
         MyApplication.getApp().getApplicationComponent().inject(this);
 
@@ -162,13 +160,8 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
             PermissionUtils.requestPermission(this, 1,
                     Manifest.permission.READ_EXTERNAL_STORAGE, true);
 
-            String[] PERMISSIONS = {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-            };
-            ActivityCompat.requestPermissions(this, PERMISSIONS, 0);
-            Intent gallery =
-                    new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//            ActivityCompat.requestPermissions(this, PERMISSIONS, 0);
+            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             getChosenPhoto.launch(Intent.createChooser(gallery, "Selectati poza"));
         });
 
@@ -182,9 +175,6 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
 
         cameraButton.setOnClickListener(view -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            String[] PERMISSIONS = {Manifest.permission.CAMERA};
-            ActivityCompat.requestPermissions(this, PERMISSIONS, 0);
-
             takePhoto.launch(takePictureIntent);
         });
 
@@ -261,6 +251,7 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
         });
 
     }
+
 
     private void insertInPrivateStorage(String fileName, String filePath) throws IOException {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());

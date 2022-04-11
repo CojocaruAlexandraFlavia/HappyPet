@@ -24,7 +24,7 @@ public class Location {
         this.longitude = longitude;
     }
 
-    //public Location(){}
+    public Location(){}
 
     public long getLocationId() {
         return locationId;

@@ -51,4 +51,16 @@ public class UserViewModel extends AndroidViewModel {
     public List<Doctor> getALlDoctors(){
         return repository.getAllDoctors();
     }
+
+    public List<Doctor> getDoctorsFromLocation(long locationId){
+        return repository.getDoctorsFromLocation(locationId);
+    }
+
+    public Client getClientByEmail(String email){
+        return repository.getClientByEmail(email);
+    }
+
+    public Client getClientById(long id){
+        return repository.getClientById(id);
+    }
 }

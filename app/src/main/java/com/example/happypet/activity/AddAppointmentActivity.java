@@ -1,5 +1,6 @@
 package com.example.happypet.activity;
 
+import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,7 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,28 +34,37 @@ import com.example.happypet.model.view_model.AnimalViewModel;
 import com.example.happypet.model.view_model.AppointmentViewModel;
 import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
-import com.example.happypet.util.LocalDateTimeConverter;
-import com.example.happypet.util.MyApplication;
+import com.example.happypet.util.ApplicationImpl;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 public class AddAppointmentActivity extends AppCompatActivity {
 
+    private final Calendar calendar = Calendar.getInstance();
     private long selectedLocationId = 0, selectedDoctorId = 0, selectedAppointmentTypeId = 0, selectedPetId = 0;
     private List<Location> locations;
     private List<Doctor> doctorsFromSelectedLocation;
     private List<AppointmentType> appointmentTypes;
     private List<Animal> clientPets;
+    private List<String> filledIntervals;
     private Client client;
     private long savedAppointment;
     private final String notificationChannelId = "1";
     private Spinner selectDoctorDropdown;
+    private EditText appointmentDate;
+    private LinearLayout availableIntervals;
+    private final List<String> possibleAppointmentHours = Arrays.asList("09:00", "09:30", "10:00", "10:30", "11:00",
+            "11:30", "12:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30");
 
     @Inject
     UserViewModel userViewModel;
@@ -72,13 +85,15 @@ public class AddAppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_appointment);
 
-        MyApplication.getApp().getApplicationComponent().inject(this);
+        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         Button addAppointment = findViewById(R.id.button_add_appointment);
         Spinner selectLocationDropdown = findViewById(R.id.select_location_dropdown);
         Spinner selectAppointmentTypeDropdown = findViewById(R.id.select_appointment_type_dropdown);
         Spinner selectPetDropdown = findViewById(R.id.select_animal_dropdown);
         selectDoctorDropdown = findViewById(R.id.select_doctor_dropdown);
+        appointmentDate = findViewById(R.id.select_date);
+        availableIntervals = findViewById(R.id.available_intervals);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
@@ -95,16 +110,19 @@ public class AddAppointmentActivity extends AppCompatActivity {
             new Thread(() -> {
                 client = userViewModel.getClientById(1);
                 clientPets = animalViewModel.getAnimalsForOwner(client.getClientId());
-                System.out.println("client pets: " + clientPets.size());
-
                 List<String> petNames = clientPets.stream().map(Animal::getName).collect(Collectors.toList());
                 ArrayAdapter<String> petAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, petNames);
                 this.runOnUiThread(() -> selectPetDropdown.setAdapter(petAdapter));
-
             }).start();
         }
 
         new Thread(() -> {
+//            Appointment appointment = new Appointment();
+//            appointment.setDate("12/04/2022 10:00");
+//            appointment.setAppointmentTypeId(1);
+//            appointment.setDoctorId(1);
+//            appointment.setAnimalId(1);
+//            appointmentViewModel.insertAppointment(appointment);
 //
 //            Client client1 = new Client();
 //            client1.setLastName("C");
@@ -167,7 +185,6 @@ public class AddAppointmentActivity extends AppCompatActivity {
             this.runOnUiThread(() -> selectAppointmentTypeDropdown.setAdapter(appointmentTypeAdapter));
 
             doctorsFromSelectedLocation = userViewModel.getALlDoctors();
-            System.out.println("doctord from selected location: " + doctorsFromSelectedLocation.size());
             List<String> doctorsNames = doctorsFromSelectedLocation.stream().map(d -> d.getFirstName() + " " + d.getLastName()).collect(Collectors.toList());
             ArrayAdapter<String> doctorsAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, doctorsNames);
             doctorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -227,12 +244,11 @@ public class AddAppointmentActivity extends AppCompatActivity {
         });
 
         addAppointment.setOnClickListener(v -> {
-
             Appointment appointment = new Appointment();
             appointment.setAppointmentTypeId(selectedAppointmentTypeId);
             appointment.setAnimalId(selectedPetId);
             appointment.setDoctorId(selectedDoctorId);
-            appointment.setDate(LocalDateTimeConverter.toDateString(LocalDateTime.now()));
+            appointment.setDate(appointmentDate.getText().toString());
             createNotificationChannel();
             new Thread(() -> {
                 savedAppointment = appointmentViewModel.insertAppointment(appointment);
@@ -254,9 +270,47 @@ public class AddAppointmentActivity extends AppCompatActivity {
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                 notificationManager.notify(notification.number, notification);
             }).start();
-
-
         });
+
+        DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH,month);
+            calendar.set(Calendar.DAY_OF_MONTH,day);
+            updateLabel();
+        };
+
+        appointmentDate.setOnClickListener((View.OnClickListener) view ->
+                new DatePickerDialog(AddAppointmentActivity.this, date,
+                        calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void updateLabel(){
+        String format ="dd/MM/yyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ROOT);
+        String selectedDate = dateFormat.format(calendar.getTime());
+        appointmentDate.setText(selectedDate);
+        if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+            TextView textView = new TextView(this);
+            textView.setText(R.string.nu_poti_face_programari_in_weekend);
+            this.runOnUiThread(() -> availableIntervals.addView(textView));
+        }else{
+            new Thread(() -> {
+                this.runOnUiThread(() -> availableIntervals.removeAllViews());
+                filledIntervals = appointmentViewModel.getAppointmentsForDay(selectedDate);
+                List<String> availableIntervalsForDay = new ArrayList<>(possibleAppointmentHours);
+                availableIntervalsForDay.removeAll(filledIntervals);
+                this.runOnUiThread(() -> availableIntervalsForDay.forEach(interval -> availableIntervals.addView(createViewForInterval(interval))));
+            }).start();
+        }
+    }
+
+    private TextView createViewForInterval(String hour){
+        TextView textView = new TextView(this);
+        textView.setText(hour);
+        String dayAndHour = appointmentDate.getText().toString() + " " + textView.getText();
+        textView.setOnClickListener(view -> appointmentDate.setText(dayAndHour));
+        return textView;
     }
 
     private void createNotificationChannel() {

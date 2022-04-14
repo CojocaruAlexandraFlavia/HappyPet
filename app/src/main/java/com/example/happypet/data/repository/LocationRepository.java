@@ -33,4 +33,6 @@ public class LocationRepository {
         return locationDao.getLocationById(id);
     }
 
+    public void deleteAllLocations(){RoomDatabaseImpl.databaseWriteExecutor.execute(locationDao::deleteAll);}
+
 }

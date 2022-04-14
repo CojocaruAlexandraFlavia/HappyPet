@@ -7,6 +7,8 @@ import androidx.room.Query;
 
 import com.example.happypet.model.Appointment;
 
+import java.util.List;
+
 @Dao
 public interface AppointmentDao {
 
@@ -21,5 +23,8 @@ public interface AppointmentDao {
 
     @Query("SELECT appointmentId FROM appointment WHERE rowId=:rowId")
     long getAppointmentByRowId(long rowId);
+
+    @Query("SELECT SUBSTR(date, 12, 6) FROM appointment WHERE SUBSTR(date, 1, 10)=:day")
+    List<String> getAppointmentsForDay(String day);
 
 }

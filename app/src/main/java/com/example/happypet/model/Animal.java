@@ -21,14 +21,14 @@ public class Animal {
     public static final String DOG = "DOG";
     public static final String CAT = "CAT";
 
+    @StringDef({DOG, CAT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AnimalType {}
+
     @PrimaryKey(autoGenerate = true)
     private long animalId;
 
     private String name;
-
-    @StringDef({DOG, CAT})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface AnimalType {}
 
     private @AnimalType String type;
 
@@ -36,14 +36,6 @@ public class Animal {
 
     @ColumnInfo(index = true)
     private long ownerId;
-
-//    public Animal(long animalId, String name, @AnimalType String type, int age, long ownerId) {
-//        this.animalId = animalId;
-//        this.name = name;
-//        this.type = type;
-//        this.age = age;
-//        this.ownerId = ownerId;
-//    }
 
     public Animal(){}
 

@@ -42,5 +42,9 @@ public class AppointmentViewModel extends AndroidViewModel {
         return appointmentRepository.getAppointmentTypeById(id);
     }
 
+    public List<String> getAppointmentsForDay(String day){
+        return appointmentRepository.getAppointmentsForDay(day);
+    }
+
 
 }

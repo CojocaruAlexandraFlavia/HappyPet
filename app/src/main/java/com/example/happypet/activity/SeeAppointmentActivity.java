@@ -16,9 +16,7 @@ import com.example.happypet.model.view_model.AnimalViewModel;
 import com.example.happypet.model.view_model.AppointmentViewModel;
 import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
-import com.example.happypet.util.MyApplication;
-
-import java.util.Objects;
+import com.example.happypet.util.ApplicationImpl;
 
 import javax.inject.Inject;
 
@@ -49,7 +47,7 @@ public class SeeAppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_appointment);
 
-        MyApplication.getApp().getApplicationComponent().inject(this);
+        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         long id = getIntent().getExtras().getLong("id");
 

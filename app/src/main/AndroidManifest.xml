@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.happypet">
 
-
-
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" android:required="true"
+    <uses-permission android:name="android.permission.CAMERA"
+        android:required="true"
         android:requiredFeature="true"
         tools:targetApi="o" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -22,6 +24,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <queries>
         <package android:name="com.facebook.katana" />
@@ -41,10 +44,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HappyPet"
-        android:name=".util.MyApplication">
+        android:name=".util.ApplicationImpl"
+        tools:node="replace"
+        tools:replace="icon">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" tools:replace="android:value"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" tools:replace="android:value"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <uses-library android:name="com.google.android.maps" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <provider android:authorities="com.facebook.app.FacebookContentProvider523732319315186"
             android:name="com.facebook.FacebookContentProvider"
@@ -57,8 +68,7 @@
 <!--            </intent-filter>-->
 <!--        </service>-->
 
-        <activity
-            android:name=".activity.AddAppointmentActivity"
+        <activity android:name=".activity.MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,13 +85,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MapsActivity"
+        <activity
+            android:name=".activity.AddAppointmentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".activity.FacebookLoginActivity"
@@ -104,13 +116,6 @@
             </intent-filter>
         </activity>
 
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
-        <uses-library android:name="com.google.android.maps" />
-
-
         <activity android:name=".activity.RegisterActivity"
             android:exported="true">
             <intent-filter>
@@ -124,10 +129,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
-<!--                <category android:name="android.intent.category.BROWSER" />-->
+                <category android:name="android.intent.category.BROWSER" />
                 <data
                     android:scheme="http"
-                    android:host="www.animalute-fericite-myapp.ro"/>
+                    android:host="animalute-fericite-app.ro"/>
             </intent-filter>
         </activity>
 

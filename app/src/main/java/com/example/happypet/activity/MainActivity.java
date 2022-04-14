@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
 //            new Thread(() -> locationViewModel.insertLocation(new Location("Bucharest", "Bd Timisoara 63", "45.203575139935964", "26.040645287933796"))).start();
 //            locations = locationViewModel.getAllLocations();
             new Thread(() -> {
-                userViewModel.insertDoctor(new Doctor("token", 1L));
+                //userViewModel.insertDoctor(new Doctor("token", 1L));
                 //doctors = userViewModel.getALlDoctors();
             });
 

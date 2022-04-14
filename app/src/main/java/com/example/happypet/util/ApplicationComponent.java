@@ -20,7 +20,7 @@ public interface ApplicationComponent{
     void inject(RegisterActivity registerActivity);
     void inject(UserViewModel userViewModel);
     void inject(UserRepository userRepository);
-    void inject(MyApplication myApplication);
+    void inject(ApplicationImpl applicationImpl);
     void inject(MapsActivity mapsActivity);
     void inject(FacebookLoginActivity facebookLoginActivity);
     void inject(AddAppointmentActivity activity);

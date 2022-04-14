@@ -6,7 +6,8 @@ plugins {
 
 android {
     compileSdk 31
-
+//    useAndroidX true
+//    enableJetifier true
     defaultConfig {
         applicationId "com.example.happypet"
         minSdk 19
@@ -35,13 +36,15 @@ android {
 
 dependencies {
 
-    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-messaging:23.0.2'
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth:21.0.3'
+//    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-core:20.1.2'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
+    //implementation 'com.google.android.ads.consent:consent-library:1.0.8'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.4'
     implementation "org.mindrot:jbcrypt:0.4"
@@ -54,9 +57,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
-
     implementation 'androidx.room:room-runtime:2.4.2'
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
+    implementation "com.google.android.gms:play-services-base:18.0.1"
 
     def daggerVer = 2.41
 
@@ -66,4 +69,5 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVer"
 
     implementation "androidx.multidex:multidex:2.0.1"
+
 }

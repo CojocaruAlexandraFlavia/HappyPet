@@ -35,12 +35,6 @@ public class AppointmentRepository {
     }
 
     public long insertAppointment(Appointment appointment){
-//        AtomicLong returnedId = new AtomicLong();
-//        RoomDatabaseImpl.databaseWriteExecutor.execute(() -> {
-//            returnedId.set(appointmentDao.insertAppointment(appointment));
-//        });
-//        return returnedId.get();
-
         Callable<Long> insertCallable = () -> appointmentDao.insertAppointment(appointment);
         long rowId, savedAppointmentId = 0;
 
@@ -68,6 +62,10 @@ public class AppointmentRepository {
 
     public AppointmentType getAppointmentTypeById(long id){
         return appointmentTypeDao.getAppointmentTypeById(id);
+    }
+
+    public List<String> getAppointmentsForDay(String day){
+        return appointmentDao.getAppointmentsForDay(day);
     }
 
 }

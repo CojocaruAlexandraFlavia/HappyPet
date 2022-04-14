@@ -33,4 +33,8 @@ public class LocationViewModel extends AndroidViewModel {
         return locationRepository.getLocationById(id);
     }
 
+    public void deleteAllLocations() {
+        locationRepository.deleteAllLocations();
+    }
+
 }

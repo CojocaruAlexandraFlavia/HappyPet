@@ -81,5 +81,7 @@
     <string name="programare">Programare</string>
     <string name="nume_animal_de_companie">Nume animal de companie</string>
     <string name="data">Data</string>
+    <string name="selecteaza_data_programarii">Selectează data programării</string>
+    <string name="nu_poti_face_programari_in_weekend">Nu poți face programări în weekend!</string>
 
 </resources>

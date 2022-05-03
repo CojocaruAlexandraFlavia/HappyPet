@@ -86,16 +86,20 @@
     <string name="enter_password">Parola</string>
     <string name="confirm_password">Confirma parola</string>
     <string name="register">Inregistrare</string>
-    <string name="schimba_fotografia">Adauga fotografie</string>
-    <string name="alege_o_optiune">Alege o optiune</string>
+    <string name="schimba_fotografia">Adaugă fotografie</string>
+    <string name="alege_o_optiune">Alege o opțiune</string>
     <string name="login">Logare</string>
     <string name="acasa">Acasa</string>
-    <string name="animalutele_mele">Animalutele mele</string>
+    <string name="animalutele_mele">Animăluțele mele</string>
     <string name="setari">Setari</string>
     <string name="deconectare">Deconectare</string>
     <string name="profilul_meu">Profilul meu</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="continua_cu_facebook">Continua cu Facebook</string>
+    <string name="nu_ai_cont_inregistreaza_te">Nu ai cont? Înregistrează-te!</string>
+    <string name="sau">sau</string>
+    <string name="numele_anim_lu_ului">Numele animăluțului…</string>
+    <string name="v_rsta_anim_lu_ului">Vârsta animăluțului…</string>
 
 </resources>

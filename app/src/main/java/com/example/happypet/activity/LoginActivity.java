@@ -12,6 +12,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.happypet.R;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText email, password;
     private CallbackManager mCallbackManager;
+    private TextView textNoAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.edit_email);
         password = findViewById(R.id.edit_password);
+        textNoAccount = findViewById(R.id.noAccountTextView);
         Button loginButton = findViewById(R.id.login_button);
 
         auth = FirebaseAuth.getInstance();
@@ -89,6 +92,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        textNoAccount.setOnClickListener(view ->{
+            Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
+        });
+
         loginButton.setOnClickListener(view -> {
             if(!(email.getText().toString().isEmpty()) && email.getError() == null) {
                 auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -128,8 +136,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser!= null){
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
+        }
         updateUI(currentUser);
 
     }

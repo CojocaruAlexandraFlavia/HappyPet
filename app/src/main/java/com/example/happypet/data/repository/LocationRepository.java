@@ -26,4 +26,8 @@ public class LocationRepository {
         locationDao.insertLocation(location);
     }
 
+    public Location getLocationById(Long locationId){
+        return locationDao.getLocationById(locationId);
+    }
+
 }

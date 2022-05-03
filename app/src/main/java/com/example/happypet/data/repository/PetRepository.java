@@ -9,9 +9,12 @@ import com.example.happypet.util.RoomDatabaseImpl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class PetRepository {
     private final AnimalDao animalDao;
     private final ClientDao clientDao;
+    @Inject
     public PetRepository(Application application)
     {
         RoomDatabaseImpl db = RoomDatabaseImpl.getDatabase(application);

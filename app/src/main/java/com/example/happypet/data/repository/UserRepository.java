@@ -44,6 +44,10 @@ public class UserRepository {
         Doctor doctor = doctorDao.findByEmail(email);
         return client > 0 || doctor.getDoctorId() > 0;
     }
+    public Client getClientByEmail(String email){
+        return clientDao.getClientByEmail(email);
+
+    }
 
     public Doctor getDoctorByEmail(String email){
         return doctorDao.findByEmail(email);

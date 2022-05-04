@@ -80,6 +80,20 @@
 
     <string name="facebook_app_id">523732319315186</string>
     <string name="facebook_client_token">efb99c95cb05d8bd819e49f50ed499e3</string>
+    <string name="programeaza_te">Programeaza-te</string>
+    <string name="tip_de_programare">Tip de programare</string>
+    <string name="animal_de_companie">Animal de companie</string>
+    <string name="selecteaza_locatia">Selecteaza locatia</string>
+    <string name="selecteaza_doctor">Selecteaza doctor</string>
+    <string name="string_selecteaza_doctor">Selecteaza doctor</string>
+    <string name="locatie">Locatie</string>
+    <string name="doctor">Doctor</string>
+    <string name="date_contact_client">Date contact client</string>
+    <string name="programare">Programare</string>
+    <string name="nume_animal_de_companie">Nume animal de companie</string>
+    <string name="data">Data</string>
+    <string name="selecteaza_data_programarii">Selectează data programării</string>
+    <string name="nu_poti_face_programari_in_weekend">Nu poți face programări în weekend!</string>
     <string name="enter_email">Email</string>
     <string name="last_name">Nume</string>
     <string name="first_name">Prenume</string>
@@ -101,5 +115,9 @@
     <string name="sau">sau</string>
     <string name="numele_anim_lu_ului">Numele animăluțului…</string>
     <string name="v_rsta_anim_lu_ului">Vârsta animăluțului…</string>
+
+
+
+
 
 </resources>

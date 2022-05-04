@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 import dagger.Provides;
 
 @Database(entities = {Client.class, Doctor.class, Animal.class, Appointment.class, Location.class, AppointmentType.class},
-        version = 1, exportSchema = false)
+        version = 2, exportSchema = false)
 public abstract class RoomDatabaseImpl extends RoomDatabase {
 
     public abstract ClientDao clientDao();

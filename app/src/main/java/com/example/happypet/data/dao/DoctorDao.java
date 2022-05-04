@@ -27,6 +27,8 @@ public interface DoctorDao {
 
     @Query("SELECT * FROM doctor")
     List<Doctor> getAll();
+    @Query("SELECT * FROM doctor WHERE locationId=:locationId")
+    List<Doctor> getDoctorsForLocation(long locationId);
 
     @Query("SELECT * FROM doctor WHERE firstName LIKE :searchQuery OR lastName LIKE :searchQuery")
     List<Doctor> searchDoctor(String searchQuery);

@@ -29,5 +29,6 @@ public class LocationRepository {
     public Location getLocationById(Long locationId){
         return locationDao.getLocationById(locationId);
     }
+    public void deleteAllLocations(){RoomDatabaseImpl.databaseWriteExecutor.execute(locationDao::deleteAll);}
 
 }

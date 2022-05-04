@@ -39,16 +39,23 @@ public class UserRepository {
         return clientDao.getAll();
     }
 
-    public boolean findUserByEmail(String email){
-        long client = clientDao.findByEmail(email);
+    public boolean findUserByEmail(String email) {
+        Client client = clientDao.findClientByEmail(email);
         Doctor doctor = doctorDao.findByEmail(email);
-        return client > 0 || doctor.getDoctorId() > 0;
+        return (client != null) || (doctor != null);
     }
     public Client getClientByEmail(String email){
         return clientDao.getClientByEmail(email);
 
     }
 
+    public List<Doctor> getDoctorsFromLocation(long locationId){
+        return doctorDao.getDoctorsForLocation(locationId);
+    }
+
+    public Client getClientById(long id){
+        return clientDao.getClientById(id);
+    }
     public Doctor getDoctorByEmail(String email){
         return doctorDao.findByEmail(email);
     }

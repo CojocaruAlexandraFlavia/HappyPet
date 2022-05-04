@@ -82,10 +82,10 @@ public class DrawerBaseActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.my_pets:startActivity(intent3);
+                    case R.id.my_pets:startActivity(intent);
                     case R.id.nav_home:startActivity(intent3);
                     case R.id.settings:startActivity(intent3);
-                    case R.id.add_pet:startActivity(intent3);
+                    case R.id.add_pet:startActivity(intent2);
 
                 }
                 return true;

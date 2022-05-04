@@ -23,14 +23,14 @@
             android:textSize="18sp" />
 
         <!--text view for our course description-->
-        <!--        <TextView-->
-        <!--            android:id="@+id/idDoctorlocation"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_below="@id/idDoctorName"-->
-        <!--            android:padding="5dp"-->
-        <!--            android:text="locatie:"-->
-        <!--            android:textColor="@color/black" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/idDoctorlocation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/idDoctorName"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="locatie:"-->
+<!--            android:textColor="@color/black" />-->
 
     </RelativeLayout>
 

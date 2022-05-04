@@ -2,12 +2,12 @@ package com.example.happypet.util;
 
 import android.app.Application;
 
-public class MyApplication extends Application{
+public class ApplicationImpl extends Application{
 
-    private static MyApplication app;
+    private static ApplicationImpl app;
     ApplicationComponent applicationComponent;
 
-    public static MyApplication getApp(){
+    public static ApplicationImpl getApp(){
         return app;
     }
 

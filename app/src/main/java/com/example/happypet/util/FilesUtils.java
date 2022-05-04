@@ -11,11 +11,12 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import org.apache.commons.io.IOUtils;
-
-import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,19 +32,18 @@ public class FilesUtils {
             ret = getUriRealPathAboveKitkat(ctx, uri);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("DREG", "FilePath Catch: " + e);
             ret = getFilePathFromURI(ctx, uri);
         }
         return ret;
     }
 
+    @Nullable
     private static String getFilePathFromURI(Context context, Uri contentUri) {
         //copy file and send new file path
         String fileName = getFileName(contentUri);
         if (!TextUtils.isEmpty(fileName)) {
             String TEMP_DIR_PATH = Environment.getExternalStorageDirectory().getPath();
             File copyFile = new File(TEMP_DIR_PATH + File.separator + fileName);
-            Log.d("DREG", "FilePath copyFile: " + copyFile);
             copy(context, contentUri, copyFile);
             return copyFile.getAbsolutePath();
         }
@@ -207,7 +207,7 @@ public class FilesUtils {
 
     /* Return uri represented document file real local path.*/
     @SuppressLint("Recycle")
-    private static String getRealPath(ContentResolver contentResolver, Uri uri, String whereClause) {
+    private static String getRealPath(@NonNull ContentResolver contentResolver, Uri uri, String whereClause) {
         String ret = "";
 
         // Query the uri with condition.

@@ -17,14 +17,7 @@ public class Location {
 
     private String longitude;
 
-    public Location(String city, String address, String latitude, String longitude) {
-        this.city = city;
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    //public Location(){}
+    public Location(){}
 
     public long getLocationId() {
         return locationId;

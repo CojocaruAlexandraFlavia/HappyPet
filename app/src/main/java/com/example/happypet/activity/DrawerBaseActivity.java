@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.happypet.R;
@@ -40,7 +41,7 @@ public class DrawerBaseActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore fstore;
     private FirebaseStorage storage;
-    private View userName;
+    private TextView userName;
     private ActionBarDrawerToggle toggle;
     private ImageView profilePic;
 
@@ -72,16 +73,20 @@ public class DrawerBaseActivity extends AppCompatActivity {
         }
 
 
-        Intent homeIntent = new Intent(this, PetActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyPetsActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), AddNewPetActivity.class);
+        Intent intent3 = new Intent(getApplicationContext(), HomeActivity.class);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.nav_home:startActivity(homeIntent);
-                    case R.id.settings:startActivity(homeIntent);
-                    case R.id.logout:startActivity(homeIntent);
+                    case R.id.my_pets:startActivity(intent3);
+                    case R.id.nav_home:startActivity(intent3);
+                    case R.id.settings:startActivity(intent3);
+                    case R.id.add_pet:startActivity(intent3);
+
                 }
                 return true;
             }
@@ -112,6 +117,7 @@ public class DrawerBaseActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 System.out.println(bitmap);
                 profilePic.setImageBitmap(bitmap);
+                userName.setText(auth.getCurrentUser().getDisplayName());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -3,6 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.happypet">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="true"
+        android:requiredFeature="true"
+        tools:targetApi="o" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <queries>
+        <package android:name="com.facebook.katana" />
+    </queries>
+    <queries>
+        <provider
+            android:authorities="com.facebook.katana.provider.PlatformProvider"
+            android:exported="false" /> <!-- allows app to access Facebook app features -->
+        <provider
+            android:authorities="com.facebook.orca.provider.PlatformProvider"
+            android:exported="false" /> <!-- allows sharing to Messenger app -->
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,13 +53,34 @@
             android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.MyPetsActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token"
+            tools:replace="android:value" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider523732319315186"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DrawerBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.AddNewPetActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +109,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

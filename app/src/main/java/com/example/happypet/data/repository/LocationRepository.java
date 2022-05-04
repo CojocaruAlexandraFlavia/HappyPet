@@ -17,13 +17,17 @@ public class LocationRepository {
         RoomDatabaseImpl db = RoomDatabaseImpl.getDatabase(application);
         locationDao = db.locationDao();
     }
-    
+
     public List<Location> getAllLocations(){
         return locationDao.getAllLocations();
     }
 
     public void insertLocation(Location location){
         locationDao.insertLocation(location);
+    }
+
+    public Location getLocationById(Long locationId){
+        return locationDao.getLocationById(locationId);
     }
 
 }

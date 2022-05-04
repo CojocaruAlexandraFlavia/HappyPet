@@ -51,6 +51,9 @@ public abstract class User {
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
     }
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 
 
 }

@@ -2,6 +2,7 @@ package com.example.happypet;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.happypet.activity.DoctorProfileActivity;
+import com.example.happypet.activity.HomeActivity;
 import com.example.happypet.data.repository.LocationRepository;
 import com.example.happypet.model.Doctor;
 
@@ -49,7 +52,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         // setting data to our views of recycler view.
         Doctor doctor = doctorArrayList.get(position);
         holder.doctorNameTv.setText(doctor.getFullName());
-
+        holder.doctorNameTv.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), DoctorProfileActivity.class);
+            intent.putExtra("previousIntent", true);
+            intent.putExtra("doctorId", doctor.getDoctorId());
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -67,7 +75,6 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             super(itemView);
             // initializing our views with their ids.
             doctorNameTv = itemView.findViewById(R.id.idDoctorName);
-
         }
     }
 

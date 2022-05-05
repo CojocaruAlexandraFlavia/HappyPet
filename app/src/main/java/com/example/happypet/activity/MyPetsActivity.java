@@ -27,7 +27,7 @@ public class MyPetsActivity extends DrawerBaseActivity {
     private ArrayList<String> petsAges;
     private ArrayList<Integer> petImages;
     private PetRepository petRepository;
-    private UserRepository userRepository;
+    private UserRepository userViewModel;
     private List<Animal> currentUserPets;
     private  ProgramAdapter programAdapter;
 
@@ -46,8 +46,8 @@ public class MyPetsActivity extends DrawerBaseActivity {
 
         new Thread(() -> {
             petRepository = new PetRepository(getApplication());
-            userRepository = new UserRepository(getApplication());
-            Client currentClient = userRepository.getClientByEmail(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
+            userViewModel = new UserRepository(getApplication());
+            Client currentClient = userViewModel.getClientByEmail(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
             currentUserPets = petRepository.getAllPetsForOwner(currentClient.getClientId());
             if(currentUserPets.isEmpty()){
                 System.out.println("e goala");

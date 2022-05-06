@@ -184,7 +184,7 @@ public class AddAppointmentActivity extends AppCompatActivity {
             appointmentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             this.runOnUiThread(() -> selectAppointmentTypeDropdown.setAdapter(appointmentTypeAdapter));
 
-            doctorsFromSelectedLocation = userViewModel.getALlDoctors();
+            doctorsFromSelectedLocation = userViewModel.getAllDoctors();
             List<String> doctorsNames = doctorsFromSelectedLocation.stream().map(d -> d.getFirstName() + " " + d.getLastName()).collect(Collectors.toList());
             ArrayAdapter<String> doctorsAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, doctorsNames);
             doctorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

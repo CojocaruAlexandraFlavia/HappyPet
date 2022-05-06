@@ -48,7 +48,7 @@ public class UserViewModel extends AndroidViewModel {
         repository.insertDoctor(doctor);
     }
 
-    public List<Doctor> getALlDoctors(){
+    public List<Doctor> getAllDoctors(){
         return repository.getAllDoctors();
     }
 
@@ -63,4 +63,6 @@ public class UserViewModel extends AndroidViewModel {
     public Client getClientById(long id){
         return repository.getClientById(id);
     }
+
+
 }

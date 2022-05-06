@@ -20,25 +20,36 @@
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_add_appointment.xml" value="0.1" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_add_new_pet.xml" value="0.20697463768115942" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_add_new_pet2.xml" value="0.1105072463768116" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_choose_register.xml" value="0.176" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_doctor_home.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_doctor_profile.xml" value="0.21510416666666668" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_doctor_register.xml" value="0.21510416666666668" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_drawer_base.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_drawer_base_doctor.xml" value="0.209375" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_fb_login.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_main.xml" value="0.23822463768115942" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_maps.xml" value="0.1160081053698075" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_my_appointments_doctor.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_my_pets.xml" value="0.16" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_my_pets2.xml" value="0.1105072463768116" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_pets.xml" value="0.3491847826086957" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/activity_see_appointment.xml" value="0.1160081053698075" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/contact_spinner_row_nothing_selected.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/content_layout.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/my_register.xml" value="0.2" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/nav_header.xml" value="0.2" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/register_flavia.xml" value="0.23177083333333334" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/row_layout.xml" value="0.2" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/single_appointment_item.xml" value="0.264" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/single_pet.xml" value="0.23641304347826086" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/single_pet_item.xml" value="0.2" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/nav_menu.xml" value="0.23385416666666667" />
-        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/navigation_menu.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/layout/single_pet_item.xml" value="0.1" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/nav_menu.xml" value="0.4" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/nav_menu_doctor.xml" value="0.209375" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/navigation_menu_doctor.xml" value="0.209375" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/menu/search_menu.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/mipmap-anydpi-v26/ic_channel.xml" value="0.1265" />
         <entry key="..\:/Users/flore/AndroidStudioProjects/HappyPet/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

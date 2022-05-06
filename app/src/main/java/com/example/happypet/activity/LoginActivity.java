@@ -16,8 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.happypet.R;
-import com.example.happypet.databinding.ActivityLoginBinding;
-import com.example.happypet.databinding.ActivityRegisterBinding;
+
+import com.example.happypet.model.view_model.UserViewModel;
+import com.example.happypet.util.ApplicationImpl;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -35,12 +36,18 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText email, password;
     private CallbackManager mCallbackManager;
     private TextView textNoAccount;
+    private TextView textRegisterAsDoctor;
+    @Inject
+    UserViewModel userViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +56,14 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_email);
         password = findViewById(R.id.edit_password);
         textNoAccount = findViewById(R.id.noAccountTextView);
+        textRegisterAsDoctor = findViewById(R.id.doctorRegister);
         Button loginButton = findViewById(R.id.login_button);
 
         auth = FirebaseAuth.getInstance();
         Intent home = new Intent(this, HomeActivity.class);
+        Intent doctorHome = new Intent(this, DoctorHomeActivity.class);
+
+        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton fbLoginButton = findViewById(R.id.button_facebook_login);
@@ -96,37 +107,47 @@ public class LoginActivity extends AppCompatActivity {
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
         });
+        textRegisterAsDoctor.setOnClickListener(view ->{
+            Intent i = new Intent(this, DoctorRegisterActivity.class);
+            startActivity(i);
+        });
 
         loginButton.setOnClickListener(view -> {
             if(!(email.getText().toString().isEmpty()) && email.getError() == null) {
-                auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            System.out.println("user logat cu succes");
-                            startActivity(home);
+                auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        System.out.println("user logat cu succes");
 
-                        }
-                        else{
-                            String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
-                            switch (errorCode){
-                                case "ERROR_INVALID_EMAIL":
-                                    Toast.makeText(LoginActivity.this, "Email invalid.", Toast.LENGTH_LONG).show();
-                                    email.setError("Email invalid!");
-                                    email.requestFocus();
-                                    break;
-                                case "ERROR_WRONG_PASSWORD":
-                                    Toast.makeText(LoginActivity.this, "Parola gresita.", Toast.LENGTH_LONG).show();
-                                    password.setError("Parola gresita!");
-                                    password.requestFocus();
-
-                                    break;
-                                case "ERROR_USER_NOT_FOUND":
-                                    Toast.makeText(LoginActivity.this, "User inexistent", Toast.LENGTH_LONG).show();
-                                    break;
+                        new Thread(() -> {
+                            if(userViewModel.findDoctorByEmail(email.getText().toString()) !=null){
+                                startActivity(doctorHome);
+                            }else{
+                                startActivity(home);
                             }
 
+                        }).start();
+
+
+                    }
+                    else{
+                        String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+                        switch (errorCode){
+                            case "ERROR_INVALID_EMAIL":
+                                Toast.makeText(LoginActivity.this, "Email invalid.", Toast.LENGTH_LONG).show();
+                                email.setError("Email invalid!");
+                                email.requestFocus();
+                                break;
+                            case "ERROR_WRONG_PASSWORD":
+                                Toast.makeText(LoginActivity.this, "Parola gresita.", Toast.LENGTH_LONG).show();
+                                password.setError("Parola gresita!");
+                                password.requestFocus();
+
+                                break;
+                            case "ERROR_USER_NOT_FOUND":
+                                Toast.makeText(LoginActivity.this, "User inexistent", Toast.LENGTH_LONG).show();
+                                break;
                         }
+
                     }
                 });
 

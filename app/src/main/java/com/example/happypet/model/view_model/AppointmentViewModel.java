@@ -46,5 +46,9 @@ public class AppointmentViewModel extends AndroidViewModel {
         return appointmentRepository.getAppointmentsForDay(day);
     }
 
+    public List<Appointment> getAppointmentsForDoctor(Long doctorId){
+        return appointmentRepository.getAppointmentsForDoctor(doctorId);
+    }
+
 
 }

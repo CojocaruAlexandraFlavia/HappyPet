@@ -22,7 +22,7 @@ public interface DoctorDao {
     @Query("SELECT * FROM doctor WHERE doctorId=:id")
     Doctor findById(long id);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertDoctor(Doctor doctor);
 
     @Query("SELECT * FROM doctor")

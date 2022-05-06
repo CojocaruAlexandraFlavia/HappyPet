@@ -12,18 +12,9 @@
         android:icon="@drawable/ic_baseline_account_circle_24"/>
 
     <item
-        android:id="@+id/my_pets"
-        android:title="@string/animalutele_mele"
-        android:icon="@drawable/ic_baseline_pets_24"/>
-    <item
         android:id="@+id/my_appointments"
         android:title="@string/programarile_mele"
         android:icon="@drawable/ic_baseline_assignment_24"/>
-
-    <item
-        android:id="@+id/add_pet"
-        android:title="@string/adaug_animal"
-        android:icon="@drawable/ic_baseline_add_circle_outline_24"/>
 
     <item
         android:id="@+id/settings"

@@ -12,9 +12,6 @@
         android:title="Contul meu" />
 
     <item
-        android:id="@+id/my_pets"
-        android:title="Animalutele mele" />
-    <item
         android:id="@+id/my_appointments"
         android:title="Programarile mele" />
     <item

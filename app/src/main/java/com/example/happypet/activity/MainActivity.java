@@ -45,7 +45,7 @@ public class MainActivity extends DrawerBaseActivity{
             d.setLastName("Ioan");
             userViewModel.insertDoctor(d);
             System.out.println("doctor inserat");
-            doctors = userViewModel.getALlDoctors();
+            doctors = userViewModel.getAllDoctors();
 
         }).start();
 

@@ -27,4 +27,6 @@ public interface AppointmentDao {
     @Query("SELECT SUBSTR(date, 12, 6) FROM appointment WHERE SUBSTR(date, 1, 10)=:day")
     List<String> getAppointmentsForDay(String day);
 
+    @Query("SELECT * FROM appointment WHERE doctorId =:doctorId")
+    List<Appointment> getAppointmentsForDoctor(Long doctorId);
 }

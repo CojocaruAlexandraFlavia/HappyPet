@@ -10,9 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.happypet.R;
-import com.example.happypet.model.Doctor;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,8 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class DrawerBaseActivity extends AppCompatActivity {
-
+public class DrawerBaseDoctorActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore fstore;
     private FirebaseStorage storage;
@@ -45,20 +39,20 @@ public class DrawerBaseActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private ImageView profilePic;
 
-    @SuppressLint("InflateParams")
     @Override
+    @SuppressLint({"InflateParams", "NonConstantResourceId"})
     public void setContentView(View contentView) {
-        setContentView(R.layout.activity_drawer_base);
+        setContentView(R.layout.activity_drawer_base_doctor);
 
         LayoutInflater inflater = getLayoutInflater();
-        DrawerLayout drawerLayout = (DrawerLayout) inflater.inflate(R.layout.activity_drawer_base, null);
+        DrawerLayout drawerLayout = (DrawerLayout) inflater.inflate(R.layout.activity_drawer_base_doctor, null);
         FrameLayout container = drawerLayout.findViewById(R.id.activityContainer);
         container.addView(contentView);
         super.setContentView(drawerLayout);
         Toolbar toolbar = drawerLayout.findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
-        NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
+        NavigationView navigationView = drawerLayout.findViewById(R.id.nav_doctor_view);
         View headerView = navigationView.getHeaderView(0);
 
         auth = FirebaseAuth.getInstance();
@@ -73,23 +67,18 @@ public class DrawerBaseActivity extends AppCompatActivity {
         }
 
 
-        Intent intent = new Intent(getApplicationContext(), MyPetsActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), AddNewPetActivity.class);
-        Intent intent3 = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyAppointmentsDoctorActivity.class);
+        Intent intent3 = new Intent(getApplicationContext(), DoctorHomeActivity.class);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.my_pets:startActivity(intent);
-                    case R.id.nav_home:startActivity(intent3);
-                    case R.id.settings:startActivity(intent3);
-                    case R.id.add_pet:startActivity(intent2);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.my_appointments:startActivity(intent);
+                case R.id.nav_home:startActivity(intent);
+                case R.id.settings:startActivity(intent);
 
-                }
-                return true;
+
             }
+            return true;
         });
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);

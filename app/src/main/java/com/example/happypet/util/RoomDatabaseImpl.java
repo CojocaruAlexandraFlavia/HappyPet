@@ -14,19 +14,21 @@ import com.example.happypet.data.dao.AppointmentTypeDao;
 import com.example.happypet.data.dao.ClientDao;
 import com.example.happypet.data.dao.DoctorDao;
 import com.example.happypet.data.dao.LocationDao;
+import com.example.happypet.data.dao.TokenDao;
 import com.example.happypet.model.Animal;
 import com.example.happypet.model.Appointment;
 import com.example.happypet.model.AppointmentType;
 import com.example.happypet.model.Client;
 import com.example.happypet.model.Doctor;
 import com.example.happypet.model.Location;
+import com.example.happypet.model.Token;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dagger.Provides;
 
-@Database(entities = {Client.class, Doctor.class, Animal.class, Appointment.class, Location.class, AppointmentType.class},
+@Database(entities = {Client.class, Doctor.class, Animal.class, Appointment.class, Location.class, AppointmentType.class, Token.class},
         version = 2, exportSchema = false)
 public abstract class RoomDatabaseImpl extends RoomDatabase {
 
@@ -36,6 +38,7 @@ public abstract class RoomDatabaseImpl extends RoomDatabase {
     public abstract AppointmentDao appointmentDao();
     public abstract LocationDao locationDao();
     public abstract AppointmentTypeDao appointmentTypeDao();
+    public abstract TokenDao tokenDao();
 
     public static final int NUMBER_OF_THREADS = 10;
 
@@ -78,6 +81,24 @@ public abstract class RoomDatabaseImpl extends RoomDatabase {
 
                         AppointmentTypeDao appointmentTypeDao = INSTANCE.appointmentTypeDao();
                         appointmentTypeDao.deleteAll();
+
+                        TokenDao tokenDao = INSTANCE.tokenDao();
+                        tokenDao.deleteAll();
+//
+//                        Location l = new Location();
+//                        l.setAddress("Bujorului 24");
+//                        l.setCity("Bucuresti");
+//                        l.setLatitude("44.25");
+//                        l.setLongitude("26.34");
+//                        locationDao.insertLocation(l);
+//
+//                        String tkn = "AMAMA";
+//                        Token newT = new Token();
+//                        newT.setTokenValue(tkn);
+//                        newT.setLocationId(1L);
+//                        tokenDao.insertToken(newT);
+
+
                     });
                 }
             };

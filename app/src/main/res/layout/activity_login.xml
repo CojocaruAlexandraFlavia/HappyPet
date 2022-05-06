@@ -137,6 +137,20 @@
                 android:layout_marginBottom="20dp"
                />
 
+            <TextView
+                android:id="@+id/doctorRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:text="Inregistreaza-te ca doctor"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="15dp"
+                />
+
 
 
         </LinearLayout>

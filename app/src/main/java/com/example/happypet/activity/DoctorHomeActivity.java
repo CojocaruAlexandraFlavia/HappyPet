@@ -14,31 +14,40 @@ import android.widget.Toast;
 import com.example.happypet.DoctorAdapter;
 import com.example.happypet.R;
 import com.example.happypet.data.repository.UserRepository;
-import com.example.happypet.databinding.ActivityHomeBinding;
+import com.example.happypet.databinding.ActivityDoctorHomeBinding;
 import com.example.happypet.model.Doctor;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.example.happypet.util.ApplicationImpl;
 import com.google.firebase.auth.FirebaseAuth;
-;import java.util.ArrayList;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class HomeActivity extends DrawerBaseActivity {
+public class DoctorHomeActivity extends DrawerBaseDoctorActivity {
+
+    private ActivityDoctorHomeBinding activityDoctorHomeBinding;
 
     private RecyclerView doctorRV;
+
+
     private FirebaseAuth auth;
+
+    // variable for our adapter
+    // class and array list
     private DoctorAdapter adapter;
     private ArrayList<Doctor> doctorArrayList;
+
 
     @Inject
     UserViewModel userViewModel;
 
-    private ActivityHomeBinding activityHomeBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityHomeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(activityHomeBinding.getRoot());
+        activityDoctorHomeBinding = ActivityDoctorHomeBinding.inflate(getLayoutInflater());
+        setContentView(activityDoctorHomeBinding.getRoot());
         ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         auth = FirebaseAuth.getInstance();
@@ -114,8 +123,14 @@ public class HomeActivity extends DrawerBaseActivity {
 
         new Thread(() -> {
             doctorArrayList = (ArrayList<Doctor>) userViewModel.getAllDoctors();
+            ArrayList<Doctor> filteredList = new ArrayList<>();
+            for(Doctor d : doctorArrayList ){
+                if(!d.getEmail().equals(Objects.requireNonNull(auth.getCurrentUser()).getEmail())){
+                    filteredList.add(d);
+                }
+            }
             runOnUiThread(()->{
-                adapter = new DoctorAdapter(doctorArrayList, HomeActivity.this);
+                adapter = new DoctorAdapter(filteredList, DoctorHomeActivity.this);
 
 
                 // adding layout manager to our recycler view.
@@ -135,8 +150,6 @@ public class HomeActivity extends DrawerBaseActivity {
         }).start();
 
 
+
     }
-
-
-
 }

@@ -107,7 +107,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PetActivity" />
         <activity
             android:name=".activity.AddAppointmentActivity"
             android:exported="true">

@@ -81,13 +81,28 @@ public class DrawerBaseActivity extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.my_pets:startActivity(intent);
-                    case R.id.nav_home:startActivity(intent3);
-                    case R.id.settings:startActivity(intent3);
-                    case R.id.add_pet:startActivity(intent2);
 
+                if(item.getItemId() == R.id.my_appointments){
+                    System.out.println("ITEM IF 1" + item.getItemId());
+                    startActivity(new Intent(getApplicationContext(), MyAppointmentsActivity.class));
+                }else if(item.getItemId() == R.id.nav_home){
+                    System.out.println("ITEM IF 2" + item.getItemId());
+                    startActivity(new Intent(getApplicationContext(), DoctorHomeActivity.class));
+
+                }else if(item.getItemId() == R.id.profile){
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }else if(item.getItemId() == R.id.settings){
+                    System.out.println("ITEM IF 2" + item.getItemId());
+                }else if(item.getItemId() == R.id.logout){
+                    FirebaseAuth.getInstance().signOut();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }else if(item.getItemId() == R.id.my_pets) {
+                    startActivity(new Intent(getApplicationContext(), MyPetsActivity.class));
+                }else if(item.getItemId() == R.id.add_pet) {
+                    startActivity(new Intent(getApplicationContext(), AddNewPetActivity.class));
                 }
+
                 return true;
             }
         });

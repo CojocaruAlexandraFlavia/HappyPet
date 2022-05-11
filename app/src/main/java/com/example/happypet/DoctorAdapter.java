@@ -48,7 +48,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public void onBindViewHolder(@NonNull DoctorAdapter.ViewHolder holder, int position) {
         // setting data to our views of recycler view.
         Doctor doctor = doctorArrayList.get(position);
-        holder.doctorNameTv.setText(doctor.getFullName());
+        holder.doctorNameTv.setText("Dr. " + doctor.getFullName());
 
     }
 

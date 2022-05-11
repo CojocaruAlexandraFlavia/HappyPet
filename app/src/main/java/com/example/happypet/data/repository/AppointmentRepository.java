@@ -71,4 +71,9 @@ public class AppointmentRepository {
     public List<Appointment> getAppointmentsForDoctor(Long doctorId) {
         return appointmentDao.getAppointmentsForDoctor(doctorId);
     }
+
+
+    public List<Appointment> getAllAppointments() {
+        return appointmentDao.getAllAppointments();
+    }
 }

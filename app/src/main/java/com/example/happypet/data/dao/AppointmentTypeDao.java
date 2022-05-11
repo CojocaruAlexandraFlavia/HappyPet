@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.happypet.model.Appointment;
 import com.example.happypet.model.AppointmentType;
 
 import java.util.List;
@@ -22,5 +23,6 @@ public interface AppointmentTypeDao {
 
     @Query("SELECT * FROM appointment_type WHERE appointmentTypeId=:id")
     AppointmentType getAppointmentTypeById(long id);
+
 
 }

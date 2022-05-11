@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 
 public class DrawerBaseDoctorActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -67,19 +68,28 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
         }
 
 
-        Intent intent = new Intent(getApplicationContext(), MyAppointmentsDoctorActivity.class);
-        Intent intent3 = new Intent(getApplicationContext(), DoctorHomeActivity.class);
-
         navigationView.setNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.my_appointments:startActivity(intent);
-                case R.id.nav_home:startActivity(intent);
-                case R.id.settings:startActivity(intent);
+            if(item.getItemId() == R.id.my_appointments){
+                System.out.println("ITEM IF 1" + item.getItemId());
+                startActivity(new Intent(getApplicationContext(), MyAppointmentsDoctorActivity.class));
+            }else if(item.getItemId() == R.id.nav_home){
+                System.out.println("ITEM IF 2" + item.getItemId());
+                startActivity(new Intent(getApplicationContext(), DoctorHomeActivity.class));
 
-
+            }else if(item.getItemId() == R.id.profile){
+                startActivity(new Intent(getApplicationContext(), DoctorProfileActivity.class));
+            }else if(item.getItemId() == R.id.settings){
+                System.out.println("ITEM IF 2" + item.getItemId());
+            }else if(item.getItemId() == R.id.logout){
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
+
             return true;
         });
+
+
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);

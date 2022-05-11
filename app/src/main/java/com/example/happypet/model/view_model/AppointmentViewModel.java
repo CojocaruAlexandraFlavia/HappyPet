@@ -26,6 +26,9 @@ public class AppointmentViewModel extends AndroidViewModel {
         return appointmentRepository.insertAppointment(appointment);
     }
 
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.getAllAppointments();
+    }
     public List<AppointmentType> getAllAppointmentTypes() {
         return appointmentRepository.getAllAppointmentTypes();
     }

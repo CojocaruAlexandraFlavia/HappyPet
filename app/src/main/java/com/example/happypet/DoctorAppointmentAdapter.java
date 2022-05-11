@@ -23,7 +23,7 @@ public class DoctorAppointmentAdapter extends ArrayAdapter<String> {
 
 
     public DoctorAppointmentAdapter(Context context, ArrayList<String> petTypes, ArrayList<String> petAges, ArrayList<String> appointmentDate, ArrayList<String> appointmentType,ArrayList<String> appointmentPrice, ArrayList<String> ownerName) {
-        super(context, R.layout.single_pet_item, R.id.petType, petTypes);
+        super(context, R.layout.single_appointment_item, R.id.petType, petTypes);
         this.context = context;
         this.petTypes = petTypes;
         this.petAges = petAges;
@@ -55,10 +55,10 @@ public class DoctorAppointmentAdapter extends ArrayAdapter<String> {
         }else{
             holder.petAge.setText(("Vârstă: " + petAges.get(position) + " ani"));
         }
-        holder.appointmentDate.setText("Data programarii: " + appointmentDate.get(position));
-        holder.appointmentType.setText("Tipul programarii: " + appointmentType.get(position));
-        holder.appointmentPrice.setText("Pretul programarii; " + appointmentPrice.get(position) + " RON");
-        holder.ownerName.setText("Stapan:  " + ownerName.get(position));
+        holder.appointmentDate.setText("Data programării: " + appointmentDate.get(position));
+        holder.appointmentType.setText("Tipul programării: " + appointmentType.get(position));
+        holder.appointmentPrice.setText("Prețul programării: " + appointmentPrice.get(position) + " RON");
+        holder.ownerName.setText("Stăpân:  " + ownerName.get(position));
 
         singleItem.setOnClickListener(view ->{
             Toast.makeText(getContext(), "You clicked : " + petTypes.get(position), Toast.LENGTH_SHORT).show();

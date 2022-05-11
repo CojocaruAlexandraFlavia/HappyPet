@@ -8,6 +8,7 @@ import com.example.happypet.activity.FacebookLoginActivity;
 import com.example.happypet.activity.HomeActivity;
 import com.example.happypet.activity.LoginActivity;
 import com.example.happypet.activity.MapsActivity;
+import com.example.happypet.activity.MyAppointmentsActivity;
 import com.example.happypet.activity.MyAppointmentsDoctorActivity;
 import com.example.happypet.activity.RegisterActivity;
 import com.example.happypet.activity.SeeAppointmentActivity;
@@ -36,5 +37,7 @@ public interface ApplicationComponent{
     void inject(DoctorHomeActivity doctorHomeActivity);
     void inject(HomeActivity homeActivity);
     void inject(MyAppointmentsDoctorActivity myAppointmentsDoctorActivity);
+
+    void inject(MyAppointmentsActivity myAppointmentsActivity);
 }
 

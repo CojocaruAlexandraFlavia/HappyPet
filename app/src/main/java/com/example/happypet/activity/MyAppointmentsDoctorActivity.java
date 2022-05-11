@@ -77,21 +77,26 @@ public class MyAppointmentsDoctorActivity extends DrawerBaseDoctorActivity {
             doctorEmail = auth.getCurrentUser().getEmail();
             new Thread(() -> {
                 Doctor d = userViewModel.findDoctorByEmail(doctorEmail);
-                AppointmentType app = new AppointmentType();
-                app.setName("CONTROL");
-                app.setPrice(200f);
-                appointmentViewModel.insertAppointmentType(app);
+//                AppointmentType app = new AppointmentType();
+//                app.setName("CONTROL");
+//                app.setPrice(200f);
+//                appointmentViewModel.insertAppointmentType(app);
+//
+//                Animal animal = new Animal();
+//                animal.setType(Animal.CAT);
+//                animal.setName("Georgiana");
+//                animal.setAge(2);
+//                animal.setOwnerId(1);
+//
+//                animalViewModel.insertAnimal(animal);
+//
+//                Appointment au = new Appointment();
+//                au.setAppointmentTypeId(1);
+//                au.setDoctorId(d.getDoctorId());
+//                au.setDate("2022-05-07");
+//                au.setAnimalId(1);
+//                appointmentViewModel.insertAppointment(au);
 
-                Animal animal = new Animal();
-                animal.setType(Animal.CAT);
-                animal.setName("Georgiana");
-                animal.setAge(2);
-
-                Appointment au = new Appointment();
-                au.setAppointmentTypeId(app.getAppointmentTypeId());
-                au.setDoctorId(d.getDoctorId());
-                au.setDate("2022-05-07");
-//                au.setAnimalId();
 
 
                 myAppointments = (ArrayList<Appointment>) appointmentViewModel.getAppointmentsForDoctor(d.getDoctorId());

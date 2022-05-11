@@ -29,4 +29,7 @@ public interface AppointmentDao {
 
     @Query("SELECT * FROM appointment WHERE doctorId =:doctorId")
     List<Appointment> getAppointmentsForDoctor(Long doctorId);
+
+    @Query("SELECT * FROM appointment")
+    List<Appointment> getAllAppointments();
 }

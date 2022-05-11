@@ -14,10 +14,19 @@
         android:background="#BFCBE3E3"
         >
         <TextView
-            android:id="@+id/dateTextView"
+            android:id="@+id/doctorName"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="Doctor: "
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/appointmentLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data programarii: "
+            android:text="Locație: "
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginStart="20dp"
@@ -41,15 +50,17 @@
             android:text="Varsta animalului: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <TextView
-            android:id="@+id/ownerName"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="left"
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data programarii: "
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:text="Stapan: "
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_marginStart="20dp"
+            />
+
         <TextView
             android:id="@+id/typeTextView"
             android:layout_width="wrap_content"

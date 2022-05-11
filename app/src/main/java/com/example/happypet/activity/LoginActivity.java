@@ -157,14 +157,19 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-//        FirebaseUser currentUser = auth.getCurrentUser();
-//        if (currentUser!= null){
-//            Intent i = new Intent(this, HomeActivity.class);
-//            startActivity(i);
-//        }
+        checkUserType();
 //        updateUI(currentUser);
 
     }
+
+    private void checkUserType() {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser!= null){
+            Intent i = new Intent(this, DoctorHomeActivity.class);
+            startActivity(i);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

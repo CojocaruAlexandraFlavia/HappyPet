@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,7 +30,9 @@ import com.example.happypet.model.Client;
 import com.example.happypet.model.enums.PasswordStrength;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.example.happypet.util.ApplicationImpl;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -68,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
 
         setContentView(R.layout.activity_register);
 
-        //ApplicationImpl.getApp().getApplicationComponent().inject(this);
+        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -99,8 +102,8 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
                 int color = passwordStrength.color;
                 String message = passwordStrength.message;
                 passwordStrengthBar.setProgressTintList(ColorStateList.valueOf(color));
-                System.out.println("color: " + color);
-                System.out.println("message: " + message);
+//                System.out.println("color: " + color);
+//                System.out.println("message: " + message);
                 switch (message){
                     case "WEAK":{
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -273,6 +276,8 @@ public class RegisterActivity extends AppCompatActivity implements ActivityCompa
                                         c.setPassword(BCrypt.hashpw(passwordEditText.getText().toString(), BCrypt.gensalt()));
                                         userViewModel.insertClient(c);
 
+//                                        fstore.collection("users").document(uid).set(c)
+//                                                .addOnCompleteListener(task1 -> System.out.println("A mers"));
                                         fstore.collection("users").document(uid).set(c).addOnCompleteListener(task1 -> System.out.println("A mers"));
                                     }).start();
                                 }).start();

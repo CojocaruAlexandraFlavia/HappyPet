@@ -54,7 +54,6 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         holder.doctorNameTv.setText(doctor.getFullName());
         holder.doctorNameTv.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), DoctorProfileActivity.class);
-            intent.putExtra("previousIntent", true);
             intent.putExtra("doctorId", doctor.getDoctorId());
             view.getContext().startActivity(intent);
         });

@@ -50,6 +50,27 @@
         android:theme="@style/Theme.HappyPet"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.PetActivity" />
+
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.HomeActivity"
             android:exported="false" />
@@ -71,25 +92,18 @@
             android:authorities="com.facebook.app.FacebookContentProvider523732319315186"
             android:exported="false" />
 
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:exported="false" />
+
+
         <activity
             android:name=".activity.DrawerBaseActivity"
             android:exported="false" />
+
         <activity
             android:name=".activity.AddNewPetActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.PetActivity" />
+
+
         <activity
             android:name=".activity.AddAppointmentActivity"
             android:exported="true">
@@ -99,6 +113,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.SeeAppointmentActivity"
             android:exported="true"
@@ -109,30 +124,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activity.DoctorProfileActivity"
+            android:name=".activity.ClientProfileActivity"
             android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <!-- <category android:name="android.intent.category.BROWSER" /> -->
-                <data
-                    android:host="www.animalute-fericite-myapp.ro"
-                    android:scheme="http" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.DoctorProfileActivity" android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSER" />
+                <data
+                    android:scheme="http"
+                    android:host="animalute-fericite-app.ro"/>
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

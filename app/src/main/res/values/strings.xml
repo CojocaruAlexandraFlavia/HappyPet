@@ -116,6 +116,13 @@
     <string name="numele_anim_lu_ului">Numele animăluțului…</string>
     <string name="v_rsta_anim_lu_ului">Vârsta animăluțului…</string>
     <string name="cere_o_programare">Cere o programare</string>
+    <string name="doriti_o_programare">Doriti o programare?</string>
+    <string name="share">Share</string>
+    <string name="editeaza_profil">Editeaza profil</string>
+    <string name="adaug_animal">Adaugă animal</string>
+    <string name="selectati_un_element_din_lista">Selectati un element din lista!</string>
+    <string name="selectati_un_tip_de_programare">Selectati un tip de programare!</string>
+    <string name="ore_disponibile">Ore disponibile</string>
 
 
 </resources>

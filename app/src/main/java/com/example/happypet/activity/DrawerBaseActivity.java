@@ -40,7 +40,7 @@ public class DrawerBaseActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private ImageView profilePic;
 
-    @SuppressLint("InflateParams")
+    @SuppressLint({"InflateParams", "NonConstantResourceId"})
     @Override
     public void setContentView(View contentView) {
         setContentView(R.layout.activity_drawer_base);
@@ -67,24 +67,20 @@ public class DrawerBaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Intent myPetsIntent = new Intent(getApplicationContext(), MyPetsActivity.class);
+        Intent addNewPetIntent = new Intent(this, AddNewPetActivity.class);
+        Intent homeIntent = new Intent(this.getApplicationContext(), HomeActivity.class);
+        Intent myProfileIntent = new Intent(this.getApplicationContext(), ClientProfileActivity.class);
 
-        Intent intent = new Intent(getApplicationContext(), MyPetsActivity.class);
-        Intent intent2 = new Intent(getApplicationContext(), AddNewPetActivity.class);
-        Intent intent3 = new Intent(getApplicationContext(), HomeActivity.class);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.my_pets:startActivity(intent);
-                    case R.id.nav_home:startActivity(intent3);
-                    case R.id.settings:startActivity(intent3);
-                    case R.id.add_pet:startActivity(intent2);
-
-                }
-                return true;
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.my_pets:startActivity(myPetsIntent);
+                case R.id.nav_home:startActivity(homeIntent);
+                case R.id.settings:startActivity(homeIntent);
+                case R.id.add_pet:startActivity(addNewPetIntent);
+                case R.id.profile:startActivity(myProfileIntent);
             }
+            return true;
         });
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -106,20 +102,12 @@ public class DrawerBaseActivity extends AppCompatActivity {
         StorageReference ref = storage.getReference().child(path);
 
         File localFile = File.createTempFile("ceva", "jpg");
-        ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                System.out.println(bitmap);
-                profilePic.setImageBitmap(bitmap);
-                userName.setText(auth.getCurrentUser().getDisplayName());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                System.out.println(exception.getMessage());
-            }
-        });
+        ref.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+            System.out.println(bitmap);
+            profilePic.setImageBitmap(bitmap);
+            userName.setText(auth.getCurrentUser().getDisplayName());
+        }).addOnFailureListener(exception -> System.out.println(exception.getMessage()));
 
     }
 }

@@ -3,12 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/drawable/backhround.xml" value="0.2595" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/drawable/gradient_background.xml" value="0.246" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2595" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/drawable/ic_profil_background.xml" value="0.2595" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/drawable/roundshape.xml" value="0.2595" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_add_appointment.xml" value="0.21105072463768115" />
         <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_client_profile.xml" value="0.264" />
-        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_doctor_profile.xml" value="0.23505434782608695" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_doctor_profile.xml" value="0.264" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_drawer_base.xml" value="0.213768115942029" />
         <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_my_pets.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_pets.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/content_layout.xml" value="0.213768115942029" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/nav_header.xml" value="0.13854166666666667" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/row_layout.xml" value="0.13854166666666667" />
         <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/layout/single_pet_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Studio Projects/HappyPet/app/src/main/res/menu/navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/FMI/An III/HappyPet/app/src/main/res/layout/activity_main.xml" value="0.1421875" />
       </map>
     </option>

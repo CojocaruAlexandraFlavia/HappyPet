@@ -1,9 +1,6 @@
 package com.example.happypet.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +30,7 @@ public class AddNewPetActivity extends DrawerBaseActivity {
     private FirebaseAuth auth;
     private int option = 0;
     private PetRepository petRepository;
-    private UserRepository userRepository;
+    private UserRepository userViewModel;
     ActivityAddNewPetBinding activityAddNewPetBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,7 @@ public class AddNewPetActivity extends DrawerBaseActivity {
         activityAddNewPetBinding = ActivityAddNewPetBinding.inflate(getLayoutInflater());
         setContentView(activityAddNewPetBinding.getRoot());
         petRepository = new PetRepository(getApplication());
-        userRepository = new UserRepository(getApplication());
+        userViewModel = new UserRepository(getApplication());
 
         auth = FirebaseAuth.getInstance();
         petName = findViewById(R.id.editPetName);
@@ -87,7 +84,7 @@ public class AddNewPetActivity extends DrawerBaseActivity {
                     a.setType(Animal.DOG);
                 }
                 new Thread(() -> {
-                    Client i = userRepository.getClientByEmail(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
+                    Client i = userViewModel.getClientByEmail(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
 
                     a.setOwnerId(i.getClientId());
 

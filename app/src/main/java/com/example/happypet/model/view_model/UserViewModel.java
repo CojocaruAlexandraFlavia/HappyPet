@@ -12,7 +12,6 @@ import com.example.happypet.model.Doctor;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class UserViewModel extends AndroidViewModel {
 

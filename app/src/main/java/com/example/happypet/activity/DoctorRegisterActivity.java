@@ -231,10 +231,6 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Activit
                                     user.updateProfile(profileUpdates);
 
 
-                                    new Thread(() -> {
-                                        if(userViewModel == null){
-                                            Log.d(value, "isNull");
-                                        }
                                         new Thread(() -> {
                                             Log.d(value, "NewThread2");
                                             if(userViewModel == null){
@@ -269,7 +265,6 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Activit
 
 
                                         }).start();
-                                    }).start();
 
 
                                 } else {

@@ -108,6 +108,7 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
         String uid = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         String path = "images/" + uid + ".jpg";
         StorageReference ref = storage.getReference().child(path);
+        userName.setText(auth.getCurrentUser().getDisplayName());
 
         File localFile = File.createTempFile("ceva", "jpg");
         ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -116,7 +117,7 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 System.out.println(bitmap);
                 profilePic.setImageBitmap(bitmap);
-                userName.setText(auth.getCurrentUser().getDisplayName());
+
             }
         }).addOnFailureListener(exception -> System.out.println(exception.getMessage()));
 

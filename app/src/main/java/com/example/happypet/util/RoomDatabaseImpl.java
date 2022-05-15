@@ -85,18 +85,18 @@ public abstract class RoomDatabaseImpl extends RoomDatabase {
                         TokenDao tokenDao = INSTANCE.tokenDao();
                         tokenDao.deleteAll();
 //
-//                        Location l = new Location();
-//                        l.setAddress("Bujorului 24");
-//                        l.setCity("Bucuresti");
-//                        l.setLatitude("44.25");
-//                        l.setLongitude("26.34");
-//                        locationDao.insertLocation(l);
-//
-//                        String tkn = "AMAMA";
-//                        Token newT = new Token();
-//                        newT.setTokenValue(tkn);
-//                        newT.setLocationId(1L);
-//                        tokenDao.insertToken(newT);
+                        Location l = new Location();
+                        l.setAddress("Bujorului 24");
+                        l.setCity("Bucuresti");
+                        l.setLatitude("44.25");
+                        l.setLongitude("26.34");
+                        locationDao.insertLocation(l);
+
+                        String tkn = "AMAMA";
+                        Token newT = new Token();
+                        newT.setTokenValue(tkn);
+                        newT.setLocationId(1L);
+                        tokenDao.insertToken(newT);
 
 
                     });

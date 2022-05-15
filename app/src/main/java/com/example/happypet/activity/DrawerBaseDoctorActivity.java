@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.happypet.R;
+import com.example.happypet.model.Doctor;
+import com.example.happypet.model.view_model.UserViewModel;
+import com.example.happypet.util.ApplicationImpl;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +35,8 @@ import java.io.IOException;
 import java.util.Objects;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 
+import javax.inject.Inject;
+
 public class DrawerBaseDoctorActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore fstore;
@@ -39,6 +44,9 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
     private TextView userName;
     private ActionBarDrawerToggle toggle;
     private ImageView profilePic;
+
+    @Inject
+    UserViewModel userViewModel;
 
     @Override
     @SuppressLint({"InflateParams", "NonConstantResourceId"})
@@ -55,6 +63,7 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
 
         NavigationView navigationView = drawerLayout.findViewById(R.id.nav_doctor_view);
         View headerView = navigationView.getHeaderView(0);
+        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
         auth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
@@ -68,6 +77,7 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
         }
 
 
+
         navigationView.setNavigationItemSelectedListener(item -> {
             if(item.getItemId() == R.id.my_appointments){
                 System.out.println("ITEM IF 1" + item.getItemId());
@@ -77,7 +87,13 @@ public class DrawerBaseDoctorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), DoctorHomeActivity.class));
 
             }else if(item.getItemId() == R.id.profile){
-                startActivity(new Intent(getApplicationContext(), DoctorProfileActivity.class));
+                new Thread(()->{
+                    Doctor d = userViewModel.findDoctorByEmail(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
+                    Intent i = new Intent(getApplicationContext(), DoctorProfileActivity.class);
+                    i.putExtra("doctorId", d.getDoctorId());
+                    startActivity(i);
+                }).start();
+
             }else if(item.getItemId() == R.id.settings){
                 System.out.println("ITEM IF 2" + item.getItemId());
             }else if(item.getItemId() == R.id.logout){

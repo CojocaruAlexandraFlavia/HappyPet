@@ -87,10 +87,10 @@ public class DrawerBaseActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MyAppointmentsActivity.class));
                 }else if(item.getItemId() == R.id.nav_home){
                     System.out.println("ITEM IF 2" + item.getItemId());
-                    startActivity(new Intent(getApplicationContext(), DoctorHomeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
                 }else if(item.getItemId() == R.id.profile){
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ClientProfileActivity.class));
                 }else if(item.getItemId() == R.id.settings){
                     System.out.println("ITEM IF 2" + item.getItemId());
                 }else if(item.getItemId() == R.id.logout){
@@ -124,7 +124,7 @@ public class DrawerBaseActivity extends AppCompatActivity {
         String uid = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         String path = "images/" + uid + ".jpg";
         StorageReference ref = storage.getReference().child(path);
-
+        userName.setText(auth.getCurrentUser().getDisplayName());
         File localFile = File.createTempFile("ceva", "jpg");
         ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
@@ -132,7 +132,7 @@ public class DrawerBaseActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 System.out.println(bitmap);
                 profilePic.setImageBitmap(bitmap);
-                userName.setText(auth.getCurrentUser().getDisplayName());
+
             }
         }).addOnFailureListener(exception -> System.out.println(exception.getMessage()));
 

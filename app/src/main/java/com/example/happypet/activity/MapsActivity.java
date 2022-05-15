@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.happypet.R;
+import com.example.happypet.databinding.ActivityMapsBinding;
 import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.util.ApplicationImpl;
 import com.example.happypet.util.PermissionUtils;
@@ -33,7 +34,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
+public class MapsActivity extends DrawerBaseActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback, LocationListener{
@@ -50,6 +51,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     private GoogleMap map;
 
     LocationManager locationManager;
+    ActivityMapsBinding activityMapsBinding;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -61,32 +63,32 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 //                    .add(R.id.map , MapsFragment.class, null )
 //                    .commit() ;
 //        }
-        setContentView(R.layout.activity_maps);
+        activityMapsBinding = ActivityMapsBinding.inflate(getLayoutInflater());
+        setContentView(activityMapsBinding.getRoot());
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1000,  this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
-
-        Objects.requireNonNull(mapFragment).getMapAsync(this);
-
-        ApplicationImpl.getApp().getApplicationComponent().inject(this);
 
 
-        new Thread(() -> {
-            com.example.happypet.model.Location location = new com.example.happypet.model.Location();
-            location.setCity("Bucharest");
-            location.setLatitude("44.44345172740384");
-            location.setLongitude("25.98261679781029");
-            locationViewModel.insertLocation(location);
+        if (ContextCompat.checkSelfPermission(MapsActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(MapsActivity.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+            enableMyLocation();
+        } else {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1000,  this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
 
-            com.example.happypet.model.Location location1 = new com.example.happypet.model.Location();
-            location1.setCity("Bucharest");
-            location1.setLatitude("44.44342593401201");
-            location1.setLongitude("25.987084643507554");
-            locationViewModel.insertLocation(location1);
+            Objects.requireNonNull(mapFragment).getMapAsync(this);
 
-            locations = locationViewModel.getAllLocations();
-        }).start();
+            ApplicationImpl.getApp().getApplicationComponent().inject(this);
+
+        }
+
+
+
     }
 
     @Override
@@ -100,13 +102,16 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         map.setBuildingsEnabled(true);
         map.setIndoorEnabled(true);
         enableMyLocation();
-        for(com.example.happypet.model.Location location: locations){
-            if(location.getLatitude()!=null){
-                LatLng latLng = new LatLng(Double.parseDouble(location.getLatitude()), Double.parseDouble(location.getLongitude()));
-                map.addMarker(new MarkerOptions().position(latLng).title(location.getAddress()));
-            }
 
-        }
+        String latLngExtra = getIntent().getStringExtra("LatLng");
+        String lat = latLngExtra.split(" ")[0];
+        String lng = latLngExtra.split(" ")[1];
+        String locationName = getIntent().getStringExtra("locationName");
+        LatLng latLng = new LatLng(Double.parseDouble(lat) ,Double.parseDouble(lng));
+        map.addMarker(new MarkerOptions().position(latLng).title(locationName));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11f);
+        map.animateCamera(cameraUpdate);
+
     }
 
     @SuppressLint("MissingPermission")

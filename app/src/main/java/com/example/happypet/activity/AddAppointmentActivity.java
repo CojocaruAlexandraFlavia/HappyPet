@@ -296,8 +296,9 @@ public class AddAppointmentActivity extends AppCompatActivity {
                     intent.putExtra("id", savedAppointment);
                     TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
                     stackBuilder.addNextIntentWithParentStack(intent);
+                   // stackBuilder.addParentStack(SeeAppointmentActivity.class);
                     PendingIntent resultPendingIntent =
-                            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE);
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, notificationChannelId)
                             .setContentTitle("O noua programare adaugata!")

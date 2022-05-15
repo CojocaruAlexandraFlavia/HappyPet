@@ -69,10 +69,6 @@ public class ClientProfileActivity extends DrawerBaseActivity {
             });
         }).start();
 
-        editProfileButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this, EditProfileActivity.class);
-            startActivity(intent);
-        });
     }
 }
 

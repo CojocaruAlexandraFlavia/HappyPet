@@ -27,8 +27,6 @@ import javax.inject.Inject;
 
 public class DoctorHomeActivity extends DrawerBaseDoctorActivity {
 
-    private ActivityDoctorHomeBinding activityDoctorHomeBinding;
-
     private RecyclerView doctorRV;
 
 
@@ -46,7 +44,7 @@ public class DoctorHomeActivity extends DrawerBaseDoctorActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityDoctorHomeBinding = ActivityDoctorHomeBinding.inflate(getLayoutInflater());
+        com.example.happypet.databinding.ActivityDoctorHomeBinding activityDoctorHomeBinding = ActivityDoctorHomeBinding.inflate(getLayoutInflater());
         setContentView(activityDoctorHomeBinding.getRoot());
         ApplicationImpl.getApp().getApplicationComponent().inject(this);
 

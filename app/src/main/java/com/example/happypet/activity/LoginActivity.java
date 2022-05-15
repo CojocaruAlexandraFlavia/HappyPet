@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 import com.example.happypet.R;
 
+import com.example.happypet.model.Animal;
+import com.example.happypet.model.Location;
+import com.example.happypet.model.view_model.AnimalViewModel;
+import com.example.happypet.model.view_model.LocationViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.example.happypet.util.ApplicationImpl;
 import com.facebook.AccessToken;
@@ -48,6 +52,11 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     UserViewModel userViewModel;
 
+    @Inject
+    AnimalViewModel animalViewModel;
+
+    @Inject
+    LocationViewModel locationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +112,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        new Thread(() ->{
+
+            Animal a = new Animal();
+            a.setOwnerId(2);
+            a.setAge(1);
+            a.setName("Georgel");
+            a.setType(Animal.DOG);
+            animalViewModel.insertAnimal(a);
+
+            Location l = new Location();
+            l.setLongitude("25.98261679781029");
+            l.setLatitude("44.44345172740384");
+            l.setCity("Bucuresti");
+            l.setAddress("Florilor, 22");
+            locationViewModel.insertLocation(l);
+
+        }).start();
+
+
         textNoAccount.setOnClickListener(view ->{
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
@@ -122,7 +151,10 @@ public class LoginActivity extends AppCompatActivity {
                             if(userViewModel.findDoctorByEmail(email.getText().toString()) !=null){
                                 startActivity(doctorHome);
                             }else{
-                                startActivity(home);
+                                if(userViewModel.getClientByEmail(email.getText().toString())!=null){
+                                    startActivity(home);
+                                }
+
                             }
 
                         }).start();
@@ -164,9 +196,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkUserType() {
         FirebaseUser currentUser = auth.getCurrentUser();
+        Intent home = new Intent(this, HomeActivity.class);
+        Intent doctorHome = new Intent(this, DoctorHomeActivity.class);
         if (currentUser!= null){
-            Intent i = new Intent(this, DoctorHomeActivity.class);
-            startActivity(i);
+
+            new Thread(() -> {
+                if(userViewModel.findDoctorByEmail(email.getText().toString()) !=null){
+                    startActivity(doctorHome);
+                }else{
+                    if(userViewModel.getClientByEmail(email.getText().toString())!=null){
+                        startActivity(home);
+                    }
+                }
+
+            }).start();
         }
     }
 

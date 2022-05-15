@@ -16,17 +16,16 @@
         tools:targetApi="o" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
+
 
     <queries>
         <package android:name="com.facebook.katana" />
@@ -41,7 +40,8 @@
     </queries>
 
     <application
-        android:name=".util.ApplicationImpl"
+
+    android:name=".util.ApplicationImpl"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -50,6 +50,28 @@
         android:theme="@style/Theme.HappyPet"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+        <uses-library android:name="com.google.android.maps" />
+
+
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token"
+            tools:replace="android:value" />
+
+
+
         <activity
             android:name=".activity.MyAppointmentsDoctorActivity"
             android:exported="false" />
@@ -93,6 +115,9 @@
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DrawerBaseActivity"
             android:exported="false" />
         <activity
@@ -119,7 +144,7 @@
         <activity
             android:name=".activity.SeeAppointmentActivity"
             android:exported="true"
-            android:parentActivityName=".activity.AddAppointmentActivity">
+            android:parentActivityName=".activity.MyAppointmentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -144,7 +169,7 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <!-- <category android:name="android.intent.category.BROWSER" /> -->
+                 <category android:name="android.intent.category.BROWSER" />
                 <data
                     android:host="www.animalute-fericite-myapp.ro"
                     android:scheme="http" />

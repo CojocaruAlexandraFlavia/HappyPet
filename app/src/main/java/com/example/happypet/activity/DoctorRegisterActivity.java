@@ -248,7 +248,7 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Activit
                                             d.setLastName(lastNameEditText.getText().toString());
                                             assert t != null;
                                             d.setToken(t.getTokenValue());
-                                            d.setLocationId(1);
+                                            d.setLocationId(4);
                                             d.setPassword(BCrypt.hashpw(passwordEditText.getText().toString(), BCrypt.gensalt()));
 
                                             if(userViewModel == null){

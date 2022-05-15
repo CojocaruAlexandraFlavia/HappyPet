@@ -55,6 +55,7 @@ public class MyAppointmentsActivity extends DrawerBaseActivity {
     private ArrayList<String> petTypes;
     private ArrayList<String> petAges;
     private ArrayList<String> doctorNames;
+    private ArrayList<String> latLng;
     private ArrayList<Animal> pets;
     private ArrayList<Appointment> appointments;
 
@@ -80,6 +81,7 @@ public class MyAppointmentsActivity extends DrawerBaseActivity {
         pets = new ArrayList<>();
         appointments = new ArrayList<>();
         myAppointments = new ArrayList<>();
+        latLng = new ArrayList<>();
 
         appointmentsListView = findViewById(R.id.appointmentListView);
         if (auth.getCurrentUser() != null) {
@@ -107,12 +109,13 @@ public class MyAppointmentsActivity extends DrawerBaseActivity {
                     doctorNames.add(d.getFullName());
                     Location loc = locationViewModel.getLocationById(d.getLocationId());
                     appointmentLocations.add(loc.getCity() + " " + loc.getAddress());
+                    latLng.add(loc.getLatitude() + " " + loc.getLongitude());
 
                 }
 
                 this.runOnUiThread(() ->{
                     clientAppointmentAdapter = new ClientAppointmentAdapter(this, petTypes, petAges, appointmentDates,
-                            appointmentsTypes, appointmentsPrices, doctorNames, appointmentLocations);
+                            appointmentsTypes, appointmentsPrices, doctorNames, appointmentLocations, latLng);
                     appointmentsListView.setAdapter(clientAppointmentAdapter);
 
                 });

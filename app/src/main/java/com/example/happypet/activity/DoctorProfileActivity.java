@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +15,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.happypet.R;
+import com.example.happypet.activity.AddAppointmentActivity;
+import com.example.happypet.activity.DrawerBaseDoctorActivity;
+import com.example.happypet.databinding.ActivityDoctorProfileBinding;
 import com.example.happypet.model.Client;
 import com.example.happypet.model.Doctor;
 import com.example.happypet.model.Location;
@@ -28,7 +33,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class DoctorProfileActivity extends AppCompatActivity {
+public class DoctorProfileActivity extends DrawerBaseDoctorActivity {
 
     private TextView doctorNameView, doctorEmailView, doctorLocation;
     private Button askForAppointment;
@@ -45,13 +50,16 @@ public class DoctorProfileActivity extends AppCompatActivity {
     @Inject
     UserViewModel userViewModel;
 
+    ActivityDoctorProfileBinding activityDoctorProfileBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // activityDoctorProfileBinding = ActivityDoctorProfileBinding.inflate(getLayoutInflater());
-       // setContentView(activityDoctorProfileBinding.getRoot());
-        setContentView(R.layout.activity_doctor_profile);
+
+        activityDoctorProfileBinding = ActivityDoctorProfileBinding.inflate(getLayoutInflater());
+        setContentView(activityDoctorProfileBinding.getRoot());
+        //setContentView(R.layout.activity_doctor_profile);
 
         doctorNameView = findViewById(R.id.client_name);
         doctorEmailView = findViewById(R.id.client_phone);
@@ -68,8 +76,68 @@ public class DoctorProfileActivity extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(getIntent().hasExtra("doctorId")){
-            doctorId = getIntent().getExtras().getLong("doctorId");
+        if(currentUser != null){
+            new Thread(() -> {
+
+                if(getIntent().hasExtra("doctorId")){
+                    doctorId = getIntent().getLongExtra("doctorId", -1);
+
+                    if(doctorId != -1){
+
+                        doctorProfile =  userViewModel.getDoctorById(doctorId);
+                        if(doctorProfile.getEmail().equals(currentUser.getEmail())){
+
+                            Log.d("DOCTOR E DOCTOR", "ADEV");
+
+                            Location location = locationViewModel.getLocationById(doctorProfile.getLocationId());
+
+                            String fullName = doctorProfile.getFirstName() + " " + doctorProfile.getLastName();
+                            this.runOnUiThread(() -> {
+                                doctorNameView.setText(fullName);
+                                doctorEmailView.setText(doctorProfile.getEmail());
+                                String locationText = location.getCity() + ", " + location.getAddress();
+                                doctorLocation.setText(locationText);
+                                askForAppointmentWrapper.setVisibility(View.GONE);
+                                askForAppointment.setEnabled(false);
+                                buttonsWrapper.setWeightSum(1);
+
+                            });
+                        }else{
+                            Log.d("DOCTOR NU E DCTOR", "ADEV");
+
+                            Location location = locationViewModel.getLocationById(doctorProfile.getLocationId());
+                            client = userViewModel.getClientByEmail(currentUser.getEmail());
+                            if(client != null){
+                                String fullName = doctorProfile.getFirstName() + " " + doctorProfile.getLastName();
+                                this.runOnUiThread(() -> {
+                                    doctorNameView.setText(fullName);
+                                    doctorEmailView.setText(doctorProfile.getEmail());
+                                    String locationText = location.getCity() + ", " + location.getAddress();
+                                    doctorLocation.setText(locationText);
+                                    askForAppointmentWrapper.setVisibility(View.VISIBLE);
+                                    askForAppointment.setEnabled(true);
+                                    buttonsWrapper.setWeightSum(2);
+                                });
+                            }else{
+                                String fullName = doctorProfile.getFirstName() + " " + doctorProfile.getLastName();
+                                this.runOnUiThread(() -> {
+                                    doctorNameView.setText(fullName);
+                                    doctorEmailView.setText(doctorProfile.getEmail());
+                                    String locationText = location.getCity() + ", " + location.getAddress();
+                                    doctorLocation.setText(locationText);
+                                    askForAppointmentWrapper.setVisibility(View.GONE);
+                                    askForAppointment.setEnabled(false);
+                                    buttonsWrapper.setWeightSum(1);
+
+                                });
+                            }
+
+                        }
+
+                    }
+                }
+
+            }).start();
         }else{
             Uri uri = getIntent().getData();
             String path = uri.toString();
@@ -81,30 +149,6 @@ public class DoctorProfileActivity extends AppCompatActivity {
         ref.getDownloadUrl()
                 .addOnSuccessListener(uri -> profilePicture.setImageURI(uri))
                 .addOnFailureListener(e -> profilePicture.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.android_profile_icon_3)));
-
-        new Thread(() -> {
-            doctorProfile = userViewModel.getDoctorById(doctorId);
-            Location location = locationViewModel.getLocationById(doctorProfile.getLocationId());
-            client = userViewModel.getClientByEmail(currentUser.getEmail());
-            System.out.println("client: " + client.getFirstName());
-            System.out.println("doctor: " + doctorProfile.getFirstName() + " " + doctorProfile.getLastName());
-            String fullName = doctorProfile.getFirstName() + " " + doctorProfile.getLastName();
-            this.runOnUiThread(() -> {
-                doctorNameView.setText(fullName);
-                doctorEmailView.setText(doctorProfile.getEmail());
-                String locationText = location.getCity() + ", " + location.getAddress();
-                doctorLocation.setText(locationText);
-                if(client != null){
-                    System.out.println("client != null");
-                        askForAppointment.setEnabled(true);
-                        buttonsWrapper.setWeightSum(2);
-                }else {
-                    System.out.println("client == null");
-                        askForAppointmentWrapper.setEnabled(false);
-                        buttonsWrapper.setWeightSum(1);
-                }
-            });
-        }).start();
 
         shareDoctorProfile.setOnClickListener(v -> sendMessage("http://animalute-fericite-app.ro/?profile="+doctorId));
 

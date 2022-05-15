@@ -74,12 +74,15 @@ public class SeeAppointmentActivity extends AppCompatActivity {
                     client.getEmail() + "\n" + "Telefon: " + client.getPhoneNumber();
             String newTextLocationView = locationView.getText() + ": " + location.getAddress() + ", " + location.getCity();
 
-            dateView.setText(newTextDate);
-            appointmentTypeView.setText(newTextAppointmentType);
-            doctorView.setText(newTextDoctor);
-            petNameView.setText(newTextPet);
-            clientDataView.setText(newTextClientData);
-            locationView.setText(newTextLocationView);
+            this.runOnUiThread(() ->{
+                dateView.setText(newTextDate);
+                appointmentTypeView.setText(newTextAppointmentType);
+                doctorView.setText(newTextDoctor);
+                petNameView.setText(newTextPet);
+                clientDataView.setText(newTextClientData);
+                locationView.setText(newTextLocationView);
+
+            });
 
         }).start();
 

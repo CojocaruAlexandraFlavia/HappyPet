@@ -19,7 +19,7 @@
     <string name="creaza_cont">Crează cont</string>
     <string name="adresa_de_email">Adresă de email</string>
     <string name="poza_de_profil">Poza de profil</string>
-    <string name="adauga_poza_de_profil">Adauga poza de profil</string>
+    <string name="adauga_poza_de_profil">Adaugă poza de profil</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
 
@@ -80,13 +80,13 @@
 
     <string name="facebook_app_id">523732319315186</string>
     <string name="facebook_client_token">efb99c95cb05d8bd819e49f50ed499e3</string>
-    <string name="programeaza_te">Programeaza-te</string>
+    <string name="programeaza_te">Programează-te</string>
     <string name="tip_de_programare">Tip de programare</string>
     <string name="animal_de_companie">Animal de companie</string>
-    <string name="selecteaza_locatia">Selecteaza locatia</string>
-    <string name="selecteaza_doctor">Selecteaza doctor</string>
-    <string name="string_selecteaza_doctor">Selecteaza doctor</string>
-    <string name="locatie">Locatie</string>
+    <string name="selecteaza_locatia">Selectează locația</string>
+    <string name="selecteaza_doctor">Selectează doctor</string>
+    <string name="string_selecteaza_doctor">Selectează doctor</string>
+    <string name="locatie">Locație</string>
     <string name="doctor">Doctor</string>
     <string name="date_contact_client">Date contact client</string>
     <string name="programare">Programare</string>
@@ -97,20 +97,20 @@
     <string name="enter_email">Email</string>
     <string name="last_name">Nume</string>
     <string name="first_name">Prenume</string>
-    <string name="enter_password">Parola</string>
-    <string name="confirm_password">Confirma parola</string>
+    <string name="enter_password">Parolă</string>
+    <string name="confirm_password">Confirmă parola</string>
     <string name="register">Inregistrare</string>
     <string name="schimba_fotografia">Adaugă fotografie</string>
     <string name="alege_o_optiune">Alege o opțiune</string>
     <string name="login">Logare</string>
-    <string name="acasa">Acasa</string>
+    <string name="acasa">Acasă</string>
     <string name="animalutele_mele">Animăluțele mele</string>
-    <string name="setari">Setari</string>
+    <string name="setari">Setări</string>
     <string name="deconectare">Deconectare</string>
     <string name="profilul_meu">Profilul meu</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="continua_cu_facebook">Continua cu Facebook</string>
+    <string name="continua_cu_facebook">Continuă cu Facebook</string>
     <string name="nu_ai_cont_inregistreaza_te">Nu ai cont? Înregistrează-te!</string>
     <string name="sau">sau</string>
     <string name="numele_anim_lu_ului">Numele animăluțului…</string>
@@ -118,11 +118,11 @@
     <string name="programarile_mele">Programarile mele</string>
     <string name="adaug_animal">Adaugă animal</string>
     <string name="cere_o_programare">Cere o programare</string>
-    <string name="doriti_o_programare">Doriti o programare?</string>
+    <string name="doriti_o_programare">Doriți o programare?</string>
     <string name="share">Share</string>
-    <string name="editeaza_profil">Editeaza profil</string>
-    <string name="selectati_un_element_din_lista">Selectati un element din lista!</string>
-    <string name="selectati_un_tip_de_programare">Selectati un tip de programare!</string>
+    <string name="editeaza_profil">Editează profil</string>
+    <string name="selectati_un_element_din_lista">Selectați un element din listă!</string>
+    <string name="selectati_un_tip_de_programare">Selectați un tip de programare!</string>
     <string name="ore_disponibile">Ore disponibile</string>
 
 

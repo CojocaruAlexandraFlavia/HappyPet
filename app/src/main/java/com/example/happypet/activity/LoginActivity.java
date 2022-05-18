@@ -18,9 +18,14 @@ import android.widget.Toast;
 import com.example.happypet.R;
 
 import com.example.happypet.model.Animal;
+import com.example.happypet.model.AppointmentType;
+import com.example.happypet.model.Client;
 import com.example.happypet.model.Location;
+import com.example.happypet.model.Token;
 import com.example.happypet.model.view_model.AnimalViewModel;
+import com.example.happypet.model.view_model.AppointmentViewModel;
 import com.example.happypet.model.view_model.LocationViewModel;
+import com.example.happypet.model.view_model.TokenViewModel;
 import com.example.happypet.model.view_model.UserViewModel;
 import com.example.happypet.util.ApplicationImpl;
 import com.facebook.AccessToken;
@@ -57,6 +62,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Inject
     LocationViewModel locationViewModel;
+
+    @Inject
+    AppointmentViewModel appointmentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,19 +123,15 @@ public class LoginActivity extends AppCompatActivity {
 
         new Thread(() ->{
 
-            Animal a = new Animal();
-            a.setOwnerId(2);
-            a.setAge(1);
-            a.setName("Georgel");
-            a.setType(Animal.DOG);
-            animalViewModel.insertAnimal(a);
+            AppointmentType a = new AppointmentType();
+            a.setName("CONTROL");
+            a.setPrice(200.0);
+            appointmentViewModel.insertAppointmentType(a);
+            AppointmentType b = new AppointmentType();
+            b.setName("INTERVENȚIE");
+            b.setPrice(300.0);
+            appointmentViewModel.insertAppointmentType(b);
 
-            Location l = new Location();
-            l.setLongitude("25.98261679781029");
-            l.setLatitude("44.44345172740384");
-            l.setCity("Bucuresti");
-            l.setAddress("Florilor, 22");
-            locationViewModel.insertLocation(l);
 
         }).start();
 

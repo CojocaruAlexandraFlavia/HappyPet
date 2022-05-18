@@ -144,7 +144,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:text="Inregistreaza-te ca doctor"
+                android:text="Înregistrează-te ca doctor"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textColor="@color/black"

@@ -115,6 +115,9 @@
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.ClientProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MapsActivity"
             android:exported="false" />
         <activity

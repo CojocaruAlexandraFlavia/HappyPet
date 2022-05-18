@@ -38,7 +38,6 @@ public class MyAppointmentsDoctorActivity extends DrawerBaseDoctorActivity {
 
     @Inject
     UserViewModel userViewModel;
-
     @Inject
     AnimalViewModel animalViewModel;
 
